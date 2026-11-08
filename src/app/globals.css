@@ -1,26 +1,46 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme static inline {
+  --font-sans: var(--font-inter), Arial, sans-serif;
+  --color-background: #ffffff;
+  --color-foreground: #014442;
+  --color-deep-green: #00201f;
+  --color-hero-description: #d8e1e4;
+  --color-accent: #10b77f;
+  --text-hero: 3.4375rem;
+  --text-section: 2.8125rem;
+  --text-eyebrow: 0.875rem;
+  --text-hero-body: 1.25rem;
+  --text-section-body: 1.1875rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+body { @apply bg-background text-foreground font-sans; }
+body > main { flex: 1; }
+.site-container { max-width: 90rem; margin-inline: auto; padding-inline: clamp(1.25rem, 5vw, 5rem); }
+.header-row, .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+.header-row { min-height: 5.25rem; padding-block: .75rem; position: relative; }
+.brand { font-size: 1.625rem; font-weight: 700; line-height: 1.1; }
+.brand img { width: auto; height: auto; max-height: 3.5rem; max-width: min(16rem, 42vw); }
+.desktop-nav { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem 1.55rem; font-size: .9375rem; }
+.desktop-nav a:hover, .contacts a:hover, .mobile-nav a:hover { text-decoration: underline; }
+.header-action { @apply bg-deep-green text-accent; display: inline-flex; align-items: center; justify-content: center; gap: 1rem; border-radius: 9px; padding: .9rem 1.25rem; min-height: 49px; font-size: .875rem; font-weight: 700; }
+.whatsapp-icon { width: 21px; height: 21px; flex: none; background: url('/whatsapp.svg') center / contain no-repeat; mask: url('/whatsapp-mask.svg') center / contain no-repeat; }
+.site-footer { @apply bg-deep-green text-background; margin-top: auto; }
+.footer-row { min-height: 190px; padding-block: 2rem; }
+.site-footer .brand { font-size: 1.6875rem; }
+.contacts { display: grid; grid-template-columns: repeat(2, auto); gap: 1.2rem 2rem; font-size: 1.0625rem; font-style: normal; overflow-wrap: anywhere; }
+.mobile-nav { display: none; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+@media (max-width: 66rem) {
+  .desktop-nav { display: none; }
+  .mobile-nav { display: block; margin-left: auto; }
+  .mobile-nav summary { cursor: pointer; padding: .65rem; }
+  .mobile-nav nav { @apply bg-background; position: absolute; z-index: 2; top: 100%; inset-inline: 0; padding: 1rem 5vw; display: grid; box-shadow: 0 8px 18px #00201f20; }
+  .mobile-nav nav a { padding: .65rem; }
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (max-width: 44rem) {
+  .header-row { flex-wrap: wrap; gap: .75rem; }
+  .brand { font-size: 1.25rem; }
+  .footer-row { flex-direction: column; align-items: flex-start; justify-content: center; }
+  .contacts { grid-template-columns: 1fr; gap: .65rem; }
 }

@@ -1,0 +1,46 @@
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--color-deep-green);
+  min-height: 660px;
+  color: var(--color-background);
+}
+.container {
+  max-width: 90rem;
+  min-height: inherit;
+  margin: auto;
+  padding: clamp(4rem, 6.5vw, 6.25rem) 6.25%;
+  display: flex;
+  align-items: center;
+}
+.copy { width: min(66.6667%, 39rem); overflow-wrap: anywhere; }
+.photo { position: absolute; inset: 0 0 0 auto; width: calc(100% / 3); z-index: -2; }
+.photo img { width: 100%; height: 100%; object-fit: cover; }
+.photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to left, transparent 48%, color-mix(in srgb, var(--color-deep-green) 40%, transparent) 75%, var(--color-deep-green) 100%);
+}
+.eyebrow { color: var(--color-accent); font-size: var(--text-eyebrow); font-weight: 700; text-transform: uppercase; }
+.copy h1 { font-weight: 700; font-size: clamp(2.375rem, 3.82vw, var(--text-hero)); line-height: 1.18; max-width: 20ch; text-wrap: balance; margin-block: 1.9rem 1.3rem; }
+.description { max-width: 39rem; color: var(--color-hero-description); font-size: clamp(1rem, 1.4vw, var(--text-hero-body)); line-height: 1.25; white-space: pre-line; }
+.actions { display: flex; flex-wrap: wrap; gap: 1rem; }
+.actions:not(:empty) { margin-top: 1.5rem; }
+.actions a { flex: 0 1 17.75rem; position: relative; isolation: isolate; display: inline-flex; align-items: center; justify-content: center; gap: .65rem; min-height: 3.25rem; padding: .85rem 1.25rem; font-size: .875rem; font-weight: 700; border-radius: 11px; }
+.primary { color: var(--color-accent); }
+.primary::before { content: ""; position: absolute; z-index: -1; inset: 0; border-radius: inherit; border: 1px solid currentColor; background: var(--color-foreground); }
+.secondary { color: var(--color-background); background: url('/hero/c941d.svg') center / 100% 100% no-repeat; }
+@media (prefers-reduced-motion: no-preference) {
+  .primary::before { animation: pulse 2s ease-out infinite; }
+  @keyframes pulse { 0%, 17.5%, 42.5%, 100% { transform: scale(1); } 9% { transform: scale(1.035); animation-timing-function: ease-in; } 27.5% { transform: scale(1.02); } }
+}
+@media (max-width: 46rem) {
+  .hero { display: flex; flex-direction: column; }
+  .container { order: -1; min-height: 0; padding: 3rem 6.25% 2rem; width: 100%; }
+  .copy { width: 100%; }
+  .photo { position: relative; width: 100%; height: clamp(15rem, 65vw, 24rem); }
+  .photo::after { background: linear-gradient(to bottom, var(--color-deep-green), transparent 30%); }
+  .actions a { flex: 1 1 13rem; }
+}

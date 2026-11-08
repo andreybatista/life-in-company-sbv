@@ -1,0 +1,12 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="76.9167" height="14.0833" viewBox="0 0 76.9167 14.0833" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="Bot&#195;&#163;o / Fale conosco no WhatsApp">
+<use xlink:href="#stroke0_0_9" fill="#014442"/>
+<mask id="stroke1_0_9" fill="white">
+<use xlink:href="#stroke0_0_9"/>
+</mask>
+<path d="M2.97916 14.0833H73.9375C75.5828 14.0833 76.9167 12.7495 76.9167 11.1042V2.97917C76.9167 1.33382 75.5829 0 73.9375 0H2.97917C1.33382 0 0 1.33382 0 2.97916V11.1042C0 12.7495 1.33381 14.0833 2.97916 14.0833Z" stroke-width="0.541667" stroke="#10B77F" mask="url(#stroke1_0_9)"/>
+</g>
+<defs>
+<path id="stroke0_0_9" d="M0 2.97916C0 1.33382 1.33382 0 2.97917 0H73.9375C75.5828 0 76.9167 1.33382 76.9167 2.97917V11.1042C76.9167 12.7495 75.5828 14.0833 73.9375 14.0833H2.97916C1.33381 14.0833 0 12.7495 0 11.1042V2.97916Z"/>
+</defs>
+</svg>

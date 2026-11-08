@@ -15,6 +15,23 @@
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: schema.json
+export type Button = {
+  label?: string;
+  href?: string;
+};
+
+export type HeaderWhatsApp = {
+  label?: string;
+  url?: string;
+};
+
+export type Seo = {
+  title?: string;
+  description?: string;
+  shareImage?: ShareImage;
+  noIndex?: boolean;
+};
+
 export type SanityImageAssetReference = {
   _ref: string;
   _type: "reference";
@@ -22,23 +39,76 @@ export type SanityImageAssetReference = {
   [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
 };
 
-export type HomePage = {
+export type ShareImage = {
+  asset?: SanityImageAssetReference;
+  media?: unknown; // Unable to locate the referenced type "media" in schema
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  _type: "image";
+};
+
+export type ServicePage = {
   _id: string;
-  _type: "homePage";
+  _type: "servicePage";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
-  description?: string;
-  mainImage?: {
+  headerWhatsApp?: HeaderWhatsApp;
+  seo?: Seo;
+};
+
+export type SiteSettings = {
+  _id: string;
+  _type: "siteSettings";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  seoDefaults?: {
+    siteName?: string;
+    description?: string;
+    shareImage?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  };
+  favicon?: {
     asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    alt?: string;
     _type: "image";
   };
-  link?: string;
+  headerLogo?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  navigation?: Array<{
+    label?: string;
+    page?:
+      | "homePage"
+      | "clinicasHospitais"
+      | "academias"
+      | "edificioCardioprotegido"
+      | "cursos";
+    _key: string;
+  }>;
+  footerLogo?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  phone?: string;
+  email?: string;
+  instagramHandle?: string;
+  cnpj?: string;
 };
 
 export type SanityImageCrop = {
@@ -55,6 +125,157 @@ export type SanityImageHotspot = {
   y?: number;
   height?: number;
   width?: number;
+};
+
+export type HomePage = {
+  _id: string;
+  _type: "homePage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  headerWhatsApp?: HeaderWhatsApp;
+  sectionIds?: {
+    hero?: string;
+    history?: string;
+    importance?: string;
+    purpose?: string;
+    process?: string;
+    solutions?: string;
+    schools?: string;
+    team?: string;
+    contact?: string;
+  };
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  mainImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  primaryLabel?: string;
+  link?: string;
+  secondaryLabel?: string;
+  secondaryLink?: string;
+  history?: {
+    eyebrow?: string;
+    title?: string;
+    body?: string;
+    image?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    };
+    simulation?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    };
+    lecture?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    };
+  };
+  importance?: {
+    eyebrow?: string;
+    statement?: string;
+    description?: string;
+  };
+  purpose?: {
+    eyebrow?: string;
+    statement?: string;
+  };
+  process?: {
+    eyebrow?: string;
+    methods?: Array<{
+      title?: string;
+      description?: string;
+      icon?: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+      };
+      _type: "item";
+      _key: string;
+    }>;
+  };
+  solutions?: {
+    eyebrow?: string;
+    areas?: Array<{
+      title?: string;
+      description?: string;
+      image?: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+      };
+      button?: Button;
+      _type: "item";
+      _key: string;
+    }>;
+  };
+  schools?: {
+    eyebrow?: string;
+    title?: string;
+    image?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    };
+    legalNotice?: string;
+    description?: string;
+    topics?: Array<string>;
+    context?: string;
+    formatsTitle?: string;
+    formats?: Array<{
+      title?: string;
+      description?: string;
+      button?: Button;
+      _type: "item";
+      _key: string;
+    }>;
+  };
+  team?: {
+    eyebrow?: string;
+    name?: string;
+    credentials?: string;
+    biography?: string;
+    portrait?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    };
+  };
+  contact?: {
+    statement?: string;
+    button?: Button;
+  };
+  seo?: Seo;
 };
 
 export type SanityImagePaletteSwatch = {
@@ -161,10 +382,16 @@ export type Slug = {
 };
 
 export type AllSanitySchemaTypes =
+  | Button
+  | HeaderWhatsApp
+  | Seo
   | SanityImageAssetReference
-  | HomePage
+  | ShareImage
+  | ServicePage
+  | SiteSettings
   | SanityImageCrop
   | SanityImageHotspot
+  | HomePage
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
@@ -177,8 +404,10 @@ export type AllSanitySchemaTypes =
 
 // Source: ../web/src/app/page.tsx
 // Variable: HOME_PAGE_QUERY
-// Query: *[_id == "homePage" && _type == "homePage"][0]{title, description, mainImage, link}
+// Query: *[_id == "homePage" && _type == "homePage"][0]{  "id": sectionIds.hero, eyebrow, title, description, mainImage,  primaryLabel, link, secondaryLabel, secondaryLink}
 export type HOME_PAGE_QUERY_RESULT = {
+  id: string | null;
+  eyebrow: string | null;
   title: string | null;
   description: string | null;
   mainImage: {
@@ -189,13 +418,65 @@ export type HOME_PAGE_QUERY_RESULT = {
     alt?: string;
     _type: "image";
   } | null;
+  primaryLabel: string | null;
   link: string | null;
+  secondaryLabel: string | null;
+  secondaryLink: string | null;
 } | null;
+
+// Source: ../web/src/sanity/site-frame.ts
+// Variable: SITE_FRAME_QUERY
+// Query: {  "settings": *[_id == "siteSettings"][0]{    "name": seoDefaults.siteName,    "headerLogo": headerLogo.asset->{url, "size": metadata.dimensions},    "footerLogo": footerLogo.asset->{url, "size": metadata.dimensions},    navigation[]{_key, label, page}, phone, email, instagramHandle, cnpj  },  "button": *[_id == $pageId][0].headerWhatsApp{label, url}}
+export type SITE_FRAME_QUERY_RESULT = {
+  settings:
+    | {
+        name: null;
+        headerLogo: null;
+        footerLogo: null;
+        navigation: null;
+        phone: null;
+        email: null;
+        instagramHandle: null;
+        cnpj: null;
+      }
+    | {
+        name: string | null;
+        headerLogo: {
+          url: string | null;
+          size: SanityImageDimensions | null;
+        } | null;
+        footerLogo: {
+          url: string | null;
+          size: SanityImageDimensions | null;
+        } | null;
+        navigation: Array<{
+          _key: string;
+          label: string | null;
+          page:
+            | "academias"
+            | "clinicasHospitais"
+            | "cursos"
+            | "edificioCardioprotegido"
+            | "homePage"
+            | null;
+        }> | null;
+        phone: string | null;
+        email: string | null;
+        instagramHandle: string | null;
+        cnpj: string | null;
+      }
+    | null;
+  button: {
+    label: string | null;
+    url: string | null;
+  } | null;
+};
 
 // Query TypeMap
 declare global {
   interface SanityQueries {
-    '*[_id == "homePage" && _type == "homePage"][0]{title, description, mainImage, link}': HOME_PAGE_QUERY_RESULT;
+    '*[_id == "homePage" && _type == "homePage"][0]{\n  "id": sectionIds.hero, eyebrow, title, description, mainImage,\n  primaryLabel, link, secondaryLabel, secondaryLink\n}': HOME_PAGE_QUERY_RESULT;
+    '{\n  "settings": *[_id == "siteSettings"][0]{\n    "name": seoDefaults.siteName,\n    "headerLogo": headerLogo.asset->{url, "size": metadata.dimensions},\n    "footerLogo": footerLogo.asset->{url, "size": metadata.dimensions},\n    navigation[]{_key, label, page}, phone, email, instagramHandle, cnpj\n  },\n  "button": *[_id == $pageId][0].headerWhatsApp{label, url}\n}': SITE_FRAME_QUERY_RESULT;
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too
