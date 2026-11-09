@@ -404,7 +404,7 @@ export type AllSanitySchemaTypes =
 
 // Source: ../web/src/app/page.tsx
 // Variable: HOME_PAGE_QUERY
-// Query: *[_id == "homePage" && _type == "homePage"][0]{  "id": sectionIds.hero, eyebrow, title, description, mainImage,  primaryLabel, link, secondaryLabel, secondaryLink}
+// Query: *[_id == "homePage" && _type == "homePage"][0]{  "id": sectionIds.hero, eyebrow, title, description, mainImage,  primaryLabel, link, secondaryLabel, secondaryLink,  "historyId": sectionIds.history, history{eyebrow, title, body, image, simulation, lecture},  "importanceId": sectionIds.importance, importance{eyebrow, statement, description}}
 export type HOME_PAGE_QUERY_RESULT = {
   id: string | null;
   eyebrow: string | null;
@@ -422,6 +422,42 @@ export type HOME_PAGE_QUERY_RESULT = {
   link: string | null;
   secondaryLabel: string | null;
   secondaryLink: string | null;
+  historyId: string | null;
+  history: {
+    eyebrow: string | null;
+    title: string | null;
+    body: string | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    } | null;
+    simulation: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    } | null;
+    lecture: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    } | null;
+  } | null;
+  importanceId: string | null;
+  importance: {
+    eyebrow: string | null;
+    statement: string | null;
+    description: string | null;
+  } | null;
 } | null;
 
 // Source: ../web/src/sanity/site-frame.ts
@@ -475,7 +511,7 @@ export type SITE_FRAME_QUERY_RESULT = {
 // Query TypeMap
 declare global {
   interface SanityQueries {
-    '*[_id == "homePage" && _type == "homePage"][0]{\n  "id": sectionIds.hero, eyebrow, title, description, mainImage,\n  primaryLabel, link, secondaryLabel, secondaryLink\n}': HOME_PAGE_QUERY_RESULT;
+    '*[_id == "homePage" && _type == "homePage"][0]{\n  "id": sectionIds.hero, eyebrow, title, description, mainImage,\n  primaryLabel, link, secondaryLabel, secondaryLink,\n  "historyId": sectionIds.history, history{eyebrow, title, body, image, simulation, lecture},\n  "importanceId": sectionIds.importance, importance{eyebrow, statement, description}\n}': HOME_PAGE_QUERY_RESULT;
     '{\n  "settings": *[_id == "siteSettings"][0]{\n    "name": seoDefaults.siteName,\n    "headerLogo": headerLogo.asset->{url, "size": metadata.dimensions},\n    "footerLogo": footerLogo.asset->{url, "size": metadata.dimensions},\n    navigation[]{_key, label, page}, phone, email, instagramHandle, cnpj\n  },\n  "button": *[_id == $pageId][0].headerWhatsApp{label, url}\n}': SITE_FRAME_QUERY_RESULT;
   }
 }

@@ -2,6 +2,7 @@
 
 @theme static inline {
   --font-sans: var(--font-inter), Arial, sans-serif;
+  --color-sand: #f2eee6;
   --color-background: #ffffff;
   --color-foreground: #014442;
   --color-deep-green: #00201f;

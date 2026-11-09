@@ -1,0 +1,38 @@
+.section {
+  background: var(--color-deep-green);
+  color: var(--color-background);
+  padding-block: clamp(3rem, 5.85vw, 5.25rem) clamp(2rem, 4vw, 3.5rem);
+}
+.inner {
+  max-width: 90rem;
+  margin-inline: auto;
+  padding-inline: 6%;
+  overflow-wrap: anywhere;
+}
+.eyebrow {
+  color: var(--color-accent);
+  font-size: var(--text-eyebrow);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.statement {
+  margin-top: 1.75rem;
+  font-size: clamp(2rem, 3.15vw, var(--text-section));
+  line-height: 1.18;
+  font-weight: 700;
+}
+.description {
+  margin-top: 2rem;
+  color: var(--color-hero-description);
+  font-size: clamp(1rem, 1.4vw, var(--text-section-body));
+  line-height: 1.35;
+  white-space: pre-line;
+}
+.description p + p { margin-top: .85em; }
+.ecg {
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+  height: 5rem;
+  background: var(--color-accent);
+  opacity: .28;
+  mask: url('/ecg-wave.svg') left center / auto 100% repeat-x;
+}
