@@ -85,7 +85,6 @@ export default async function Home() {
           </section>
         )}
         {page?.process && <MethodsSection id={page.processId} content={page.process} />}
-        {page?.schools && <Schools id={page.schoolsId} data={page.schools} photo={croppedPhoto(page.schools.image, 786, 596)} />}
         {!!page?.solutions?.areas?.length && (
           <section id={page.solutionsId ?? undefined} aria-label={page.solutions.eyebrow || "Áreas de atuação"} className="bg-sand text-foreground">
             <div className="mx-auto max-w-[90rem] px-[5%] py-[clamp(3rem,5vw,5rem)]">
@@ -101,7 +100,7 @@ export default async function Home() {
                         {area.title && <h3 className="text-2xl leading-tight font-bold">{area.title}</h3>}
                         {area.description && <p className="whitespace-pre-line">{area.description}</p>}
                         {area.button?.label && href && /^(?:https?:\/\/|\/(?![\/\\])|#)/i.test(href) && (
-                          <a href={href} className="mt-auto inline-flex min-h-12 items-center gap-2 rounded-lg bg-foreground px-5 py-3 text-sm font-bold text-accent hover:underline focus-visible:outline-foreground">
+                          <a href={href} className="mt-auto inline-flex min-h-12 items-center gap-2 rounded-lg border border-accent bg-foreground px-5 py-3 text-sm font-bold text-accent hover:underline focus-visible:outline-foreground">
                             {area.button.label} <span aria-hidden="true">→</span>
                           </a>
                         )}
@@ -113,6 +112,7 @@ export default async function Home() {
             </div>
           </section>
         )}
+        {page?.schools && <Schools id={page.schoolsId} data={page.schools} photo={croppedPhoto(page.schools.image, 786, 596)} />}
         {page?.team && <Founder id={page.teamId} data={page.team} photo={croppedPhoto(page.team.portrait, 580, 856)} />}
         {page?.contact && <Conversion id={page.contactId} data={page.contact} />}
       </main>
