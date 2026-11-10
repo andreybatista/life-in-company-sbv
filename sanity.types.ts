@@ -73,6 +73,13 @@ export type ServicePage = {
     audience?: string;
     materials?: string;
     onlineCourse?: string;
+    responsibility?: string;
+    deliverables?: string;
+    commitment?: string;
+    equipment?: string;
+    developers?: string;
+    residents?: string;
+    contracting?: string;
     contact?: string;
   };
   hero?: {
@@ -151,6 +158,88 @@ export type ServicePage = {
     title?: string;
     description?: string;
     button?: Button;
+  };
+  responsibility?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    legislation?: {
+      title?: string;
+      icon?: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+      };
+      laws?: Array<{
+        title?: string;
+        url?: string;
+        description?: string;
+        _type: "item";
+        _key: string;
+      }>;
+    };
+  };
+  deliverables?: {
+    eyebrow?: string;
+    title?: string;
+    items?: Array<string>;
+  };
+  commitment?: {
+    eyebrow?: string;
+    title?: string;
+    body?: string;
+    image?: DifferentialImage;
+  };
+  equipment?: {
+    eyebrow?: string;
+    title?: string;
+    items?: Array<{
+      title?: string;
+      description?: string;
+      icon?: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+      };
+      _type: "item";
+      _key: string;
+    }>;
+  };
+  developers?: {
+    eyebrow?: string;
+    title?: string;
+    benefits?: Array<{
+      title?: string;
+      description?: string;
+      _type: "item";
+      _key: string;
+    }>;
+  };
+  residents?: {
+    eyebrow?: string;
+    title?: string;
+    items?: Array<{
+      title?: string;
+      description?: string;
+      _type: "item";
+      _key: string;
+    }>;
+  };
+  contracting?: {
+    eyebrow?: string;
+    title?: string;
+    formats?: Array<{
+      title?: string;
+      description?: string;
+      _type: "item";
+      _key: string;
+    }>;
   };
   contact?: {
     statement?: string;
@@ -347,6 +436,14 @@ export type HomePage = {
       _type: "image";
     };
     legalNotice?: string;
+    legalIcon?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    };
     description?: string;
     topics?: Array<string>;
     context?: string;
@@ -507,7 +604,7 @@ export type AllSanitySchemaTypes =
 
 // Source: ../web/src/app/page.tsx
 // Variable: HOME_PAGE_QUERY
-// Query: *[_id == "homePage" && _type == "homePage"][0]{  "id": sectionIds.hero, eyebrow, title, description, mainImage,  primaryLabel, link, secondaryLabel, secondaryLink,  "historyId": sectionIds.history, history{eyebrow, title, body, image, simulation, lecture},  "importanceId": sectionIds.importance, importance{eyebrow, statement, description},  "purposeId": sectionIds.purpose, purpose{eyebrow, statement},  "processId": sectionIds.process, process{eyebrow, methods[]{_key, title, description, "icon": icon.asset->url, "alt": icon.alt}},  "schoolsId": sectionIds.schools, schools{eyebrow,title,image,legalNotice,description,topics,context,formatsTitle,formats[]{_key,title,description,button{label,href}}},  "teamId": sectionIds.team, team{eyebrow,name,credentials,biography,portrait},  "contactId": sectionIds.contact, contact{statement,button{label,href}},  "solutionsId": sectionIds.solutions, solutions{eyebrow, areas[]{_key, title, description, image, button{label, href}}}}
+// Query: *[_id == "homePage" && _type == "homePage"][0]{  "id": sectionIds.hero, eyebrow, title, description, mainImage,  primaryLabel, link, secondaryLabel, secondaryLink,  "historyId": sectionIds.history, history{eyebrow, title, body, image, simulation, lecture},  "importanceId": sectionIds.importance, importance{eyebrow, statement, description},  "purposeId": sectionIds.purpose, purpose{eyebrow, statement},  "processId": sectionIds.process, process{eyebrow, methods[]{_key, title, description, "icon": icon.asset->url, "alt": icon.alt}},  "schoolsId": sectionIds.schools, schools{eyebrow,title,image,legalNotice,legalIcon{"url":asset->url,alt},description,topics,context,formatsTitle,formats[]{_key,title,description,button{label,href}}},  "teamId": sectionIds.team, team{eyebrow,name,credentials,biography,portrait},  "contactId": sectionIds.contact, contact{statement,button{label,href}},  "solutionsId": sectionIds.solutions, solutions{eyebrow, areas[]{_key, title, description, image, button{label, href}}}}
 export type HOME_PAGE_QUERY_RESULT = {
   id: string | null;
   eyebrow: string | null;
@@ -590,6 +687,10 @@ export type HOME_PAGE_QUERY_RESULT = {
       _type: "image";
     } | null;
     legalNotice: string | null;
+    legalIcon: {
+      url: string | null;
+      alt: string | null;
+    } | null;
     description: string | null;
     topics: Array<string> | null;
     context: string | null;
@@ -701,7 +802,7 @@ export type SITE_FRAME_QUERY_RESULT = {
 // Query TypeMap
 declare global {
   interface SanityQueries {
-    '*[_id == "homePage" && _type == "homePage"][0]{\n  "id": sectionIds.hero, eyebrow, title, description, mainImage,\n  primaryLabel, link, secondaryLabel, secondaryLink,\n  "historyId": sectionIds.history, history{eyebrow, title, body, image, simulation, lecture},\n  "importanceId": sectionIds.importance, importance{eyebrow, statement, description},\n  "purposeId": sectionIds.purpose, purpose{eyebrow, statement},\n  "processId": sectionIds.process, process{eyebrow, methods[]{_key, title, description, "icon": icon.asset->url, "alt": icon.alt}},\n  "schoolsId": sectionIds.schools, schools{eyebrow,title,image,legalNotice,description,topics,context,formatsTitle,formats[]{_key,title,description,button{label,href}}},\n  "teamId": sectionIds.team, team{eyebrow,name,credentials,biography,portrait},\n  "contactId": sectionIds.contact, contact{statement,button{label,href}},\n  "solutionsId": sectionIds.solutions, solutions{eyebrow, areas[]{_key, title, description, image, button{label, href}}}\n}': HOME_PAGE_QUERY_RESULT;
+    '*[_id == "homePage" && _type == "homePage"][0]{\n  "id": sectionIds.hero, eyebrow, title, description, mainImage,\n  primaryLabel, link, secondaryLabel, secondaryLink,\n  "historyId": sectionIds.history, history{eyebrow, title, body, image, simulation, lecture},\n  "importanceId": sectionIds.importance, importance{eyebrow, statement, description},\n  "purposeId": sectionIds.purpose, purpose{eyebrow, statement},\n  "processId": sectionIds.process, process{eyebrow, methods[]{_key, title, description, "icon": icon.asset->url, "alt": icon.alt}},\n  "schoolsId": sectionIds.schools, schools{eyebrow,title,image,legalNotice,legalIcon{"url":asset->url,alt},description,topics,context,formatsTitle,formats[]{_key,title,description,button{label,href}}},\n  "teamId": sectionIds.team, team{eyebrow,name,credentials,biography,portrait},\n  "contactId": sectionIds.contact, contact{statement,button{label,href}},\n  "solutionsId": sectionIds.solutions, solutions{eyebrow, areas[]{_key, title, description, image, button{label, href}}}\n}': HOME_PAGE_QUERY_RESULT;
     '{\n  "settings": *[_id == "siteSettings"][0]{\n    "name": seoDefaults.siteName,\n    "headerLogo": headerLogo.asset->{url, "size": metadata.dimensions},\n    "footerLogo": footerLogo.asset->{url, "size": metadata.dimensions},\n    navigation[]{_key, label, page}, phone, email, instagramHandle, cnpj\n  },\n  "button": *[_id == $pageId][0].headerWhatsApp{label, url}\n}': SITE_FRAME_QUERY_RESULT;
   }
 }

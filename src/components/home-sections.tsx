@@ -21,7 +21,7 @@ export function Schools({id, data, photo}: Props<"schools"> & Photo) {
           {data.eyebrow && <p className={styles.eyebrow}>{data.eyebrow}</p>}
           {data.title && <h2>{data.title}</h2>}
           {data.legalNotice && <p className={styles.notice}>
-            <Image src="/octicon_law.svg" alt="" width={41} height={41} className={styles.lawIcon} unoptimized />
+            {data.legalIcon?.url && <Image src={data.legalIcon.url} alt={data.legalIcon.alt ?? ""} width={41} height={41} className={styles.lawIcon} unoptimized />}
             {data.legalNotice}
           </p>}
         </div>

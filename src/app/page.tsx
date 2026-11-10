@@ -18,7 +18,7 @@ const HOME_PAGE_QUERY = defineQuery(`*[_id == "homePage" && _type == "homePage"]
   "importanceId": sectionIds.importance, importance{eyebrow, statement, description},
   "purposeId": sectionIds.purpose, purpose{eyebrow, statement},
   "processId": sectionIds.process, process{eyebrow, methods[]{_key, title, description, "icon": icon.asset->url, "alt": icon.alt}},
-  "schoolsId": sectionIds.schools, schools{eyebrow,title,image,legalNotice,description,topics,context,formatsTitle,formats[]{_key,title,description,button{label,href}}},
+  "schoolsId": sectionIds.schools, schools{eyebrow,title,image,legalNotice,legalIcon{"url":asset->url,alt},description,topics,context,formatsTitle,formats[]{_key,title,description,button{label,href}}},
   "teamId": sectionIds.team, team{eyebrow,name,credentials,biography,portrait},
   "contactId": sectionIds.contact, contact{statement,button{label,href}},
   "solutionsId": sectionIds.solutions, solutions{eyebrow, areas[]{_key, title, description, image, button{label, href}}}
