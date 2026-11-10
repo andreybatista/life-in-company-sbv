@@ -45,7 +45,7 @@ export async function SiteFrame({pageId, children}: {
       <div className="site-container footer-row">
         <Brand logo={settings?.footerLogo ?? null} name={name} />
         <address className="contacts">
-          {number && <a href={`https://wa.me/${number}`}>WhatsApp  {settings?.phone}</a>}
+          {number && <a href={`https://wa.me/${number}`}>WhatsApp  {settings?.phone}</a>}
           {instagram && <a href={`https://www.instagram.com/${encodeURIComponent(instagram)}/`}>Instagram  @{instagram}</a>}
           {settings?.email && <a href={`mailto:${settings.email}`}>{settings.email}</a>}
           {settings?.cnpj && <span>CNPJ: {settings.cnpj}</span>}

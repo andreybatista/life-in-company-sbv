@@ -6,7 +6,7 @@
 .eyebrow + h2 { margin-top: 2rem; }
 .schoolPhoto { width: 31%; height: auto; flex: none; border-radius: .85rem; }
 .notice { display: flex; align-items: flex-start; gap: 2rem; margin-top: clamp(2rem,4vw,4rem); color: var(--color-accent); max-width: 47rem; }
-.notice span { font-size: 2.6rem; line-height: 1; }
+.lawIcon { flex: none; }
 .prose, .topics, .formats, .formatsTitle { margin-top: clamp(2rem,4vw,4rem); }
 .prose, .biography, .conversion h2 { white-space: pre-line; }
 .topics, .formats { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 2rem; }

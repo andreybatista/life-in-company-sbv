@@ -25,18 +25,27 @@ export type HeaderWhatsApp = {
   url?: string;
 };
 
-export type Seo = {
-  title?: string;
-  description?: string;
-  shareImage?: ShareImage;
-  noIndex?: boolean;
-};
-
 export type SanityImageAssetReference = {
   _ref: string;
   _type: "reference";
   _weak?: boolean;
   [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+};
+
+export type DifferentialImage = {
+  asset?: SanityImageAssetReference;
+  media?: unknown;
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  alt?: string;
+  _type: "image";
+};
+
+export type Seo = {
+  title?: string;
+  description?: string;
+  shareImage?: ShareImage;
+  noIndex?: boolean;
 };
 
 export type ShareImage = {
@@ -54,7 +63,116 @@ export type ServicePage = {
   _updatedAt: string;
   _rev: string;
   headerWhatsApp?: HeaderWhatsApp;
+  sectionIds?: {
+    hero?: string;
+    reality?: string;
+    learning?: string;
+    process?: string;
+    methodology?: string;
+    differential?: string;
+    audience?: string;
+    materials?: string;
+    onlineCourse?: string;
+    contact?: string;
+  };
+  hero?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    mainImage?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    };
+    button?: Button;
+  };
+  reality?: {
+    eyebrow?: string;
+    title?: string;
+    body?: string;
+    image?: DifferentialImage;
+  };
+  learning?: {
+    eyebrow?: string;
+    topics?: Array<string>;
+  };
+  process?: {
+    eyebrow?: string;
+    title?: string;
+    steps?: Array<{
+      title?: string;
+      description?: string;
+      icon?: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+      };
+      _type: "item";
+      _key: string;
+    }>;
+  };
+  methodology?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    principles?: Array<{
+      title?: string;
+      description?: string;
+      _type: "item";
+      _key: string;
+    }>;
+  };
+  differential?: {
+    eyebrow?: string;
+    title?: string;
+    body?: string;
+    image?: DifferentialImage;
+  };
+  audience?: {
+    eyebrow?: string;
+    title?: string;
+    specialties?: Array<string>;
+  };
+  materials?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    highlights?: Array<string>;
+    button?: Button;
+  };
+  onlineCourse?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    button?: Button;
+  };
+  contact?: {
+    statement?: string;
+    button?: Button;
+  };
   seo?: Seo;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
 };
 
 export type SiteSettings = {
@@ -109,22 +227,6 @@ export type SiteSettings = {
   email?: string;
   instagramHandle?: string;
   cnpj?: string;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
 };
 
 export type HomePage = {
@@ -384,13 +486,14 @@ export type Slug = {
 export type AllSanitySchemaTypes =
   | Button
   | HeaderWhatsApp
-  | Seo
   | SanityImageAssetReference
+  | DifferentialImage
+  | Seo
   | ShareImage
   | ServicePage
-  | SiteSettings
   | SanityImageCrop
   | SanityImageHotspot
+  | SiteSettings
   | HomePage
   | SanityImagePaletteSwatch
   | SanityImagePalette
