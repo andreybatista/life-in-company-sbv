@@ -8,16 +8,17 @@ type TextImageSectionProps = {
   eyebrow?: string | null;
   title?: string | null;
   body?: string | null;
+  dark?: boolean;
   mainImage?: Photo;
   secondaryImages?: readonly (Photo | undefined)[];
 };
 
 export function TextImageSection({
-  id, eyebrow, title, body, mainImage, secondaryImages = [],
+  id, eyebrow, title, body, mainImage, dark, secondaryImages = [],
 }: TextImageSectionProps) {
   if (!title && !eyebrow && !body && !mainImage && !secondaryImages.some(Boolean)) return null;
   return (
-    <section id={id ?? undefined} className={styles.section} aria-label={eyebrow || title || undefined}>
+    <section id={id ?? undefined} className={[styles.section, dark && styles.dark].filter(Boolean).join(" ")} aria-label={eyebrow || title || undefined}>
       <div className={styles.inner}>
         <div className={styles.copy}>
           {eyebrow && <p className={styles.eyebrow}>{eyebrow}</p>}

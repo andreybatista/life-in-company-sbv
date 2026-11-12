@@ -20,3 +20,4 @@
   .inner { grid-template-columns: 1fr; }
   .gallery { width: min(100%, 26rem); justify-self: center; }
 }
+.dark { background: var(--color-deep-green); color: var(--color-background); }

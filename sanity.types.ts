@@ -751,6 +751,201 @@ export type HOME_PAGE_QUERY_RESULT = {
   } | null;
 } | null;
 
+// Source: ../web/src/sanity/services.ts
+// Variable: serviceQuery
+// Query: *[_id == $id && _type == 'servicePage'][0]
+export type ServiceQueryResult = {
+  _id: string;
+  _type: "servicePage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  headerWhatsApp?: HeaderWhatsApp;
+  sectionIds?: {
+    hero?: string;
+    reality?: string;
+    learning?: string;
+    process?: string;
+    methodology?: string;
+    differential?: string;
+    audience?: string;
+    materials?: string;
+    onlineCourse?: string;
+    responsibility?: string;
+    deliverables?: string;
+    commitment?: string;
+    equipment?: string;
+    developers?: string;
+    residents?: string;
+    contracting?: string;
+    contact?: string;
+  };
+  hero?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    mainImage?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    };
+    button?: Button;
+  };
+  reality?: {
+    eyebrow?: string;
+    title?: string;
+    body?: string;
+    image?: DifferentialImage;
+  };
+  learning?: {
+    eyebrow?: string;
+    topics?: Array<string>;
+  };
+  process?: {
+    eyebrow?: string;
+    title?: string;
+    steps?: Array<{
+      title?: string;
+      description?: string;
+      icon?: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+      };
+      _type: "item";
+      _key: string;
+    }>;
+  };
+  methodology?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    principles?: Array<{
+      title?: string;
+      description?: string;
+      _type: "item";
+      _key: string;
+    }>;
+  };
+  differential?: {
+    eyebrow?: string;
+    title?: string;
+    body?: string;
+    image?: DifferentialImage;
+  };
+  audience?: {
+    eyebrow?: string;
+    title?: string;
+    specialties?: Array<string>;
+  };
+  materials?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    highlights?: Array<string>;
+    button?: Button;
+  };
+  onlineCourse?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    button?: Button;
+  };
+  responsibility?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    legislation?: {
+      title?: string;
+      icon?: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+      };
+      laws?: Array<{
+        title?: string;
+        url?: string;
+        description?: string;
+        _type: "item";
+        _key: string;
+      }>;
+    };
+  };
+  deliverables?: {
+    eyebrow?: string;
+    title?: string;
+    items?: Array<string>;
+  };
+  commitment?: {
+    eyebrow?: string;
+    title?: string;
+    body?: string;
+    image?: DifferentialImage;
+  };
+  equipment?: {
+    eyebrow?: string;
+    title?: string;
+    items?: Array<{
+      title?: string;
+      description?: string;
+      icon?: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+      };
+      _type: "item";
+      _key: string;
+    }>;
+  };
+  developers?: {
+    eyebrow?: string;
+    title?: string;
+    benefits?: Array<{
+      title?: string;
+      description?: string;
+      _type: "item";
+      _key: string;
+    }>;
+  };
+  residents?: {
+    eyebrow?: string;
+    title?: string;
+    items?: Array<{
+      title?: string;
+      description?: string;
+      _type: "item";
+      _key: string;
+    }>;
+  };
+  contracting?: {
+    eyebrow?: string;
+    title?: string;
+    formats?: Array<{
+      title?: string;
+      description?: string;
+      _type: "item";
+      _key: string;
+    }>;
+  };
+  contact?: {
+    statement?: string;
+    button?: Button;
+  };
+  seo?: Seo;
+} | null;
+
 // Source: ../web/src/sanity/site-frame.ts
 // Variable: SITE_FRAME_QUERY
 // Query: {  "settings": *[_id == "siteSettings"][0]{    "name": seoDefaults.siteName,    "headerLogo": headerLogo.asset->{url, "size": metadata.dimensions},    "footerLogo": footerLogo.asset->{url, "size": metadata.dimensions},    navigation[]{_key, label, page}, phone, email, instagramHandle, cnpj  },  "button": *[_id == $pageId][0].headerWhatsApp{label, url}}
@@ -803,6 +998,7 @@ export type SITE_FRAME_QUERY_RESULT = {
 declare global {
   interface SanityQueries {
     '*[_id == "homePage" && _type == "homePage"][0]{\n  "id": sectionIds.hero, eyebrow, title, description, mainImage,\n  primaryLabel, link, secondaryLabel, secondaryLink,\n  "historyId": sectionIds.history, history{eyebrow, title, body, image, simulation, lecture},\n  "importanceId": sectionIds.importance, importance{eyebrow, statement, description},\n  "purposeId": sectionIds.purpose, purpose{eyebrow, statement},\n  "processId": sectionIds.process, process{eyebrow, methods[]{_key, title, description, "icon": icon.asset->url, "alt": icon.alt}},\n  "schoolsId": sectionIds.schools, schools{eyebrow,title,image,legalNotice,legalIcon{"url":asset->url,alt},description,topics,context,formatsTitle,formats[]{_key,title,description,button{label,href}}},\n  "teamId": sectionIds.team, team{eyebrow,name,credentials,biography,portrait},\n  "contactId": sectionIds.contact, contact{statement,button{label,href}},\n  "solutionsId": sectionIds.solutions, solutions{eyebrow, areas[]{_key, title, description, image, button{label, href}}}\n}': HOME_PAGE_QUERY_RESULT;
+    "*[_id == $id && _type == 'servicePage'][0]": ServiceQueryResult;
     '{\n  "settings": *[_id == "siteSettings"][0]{\n    "name": seoDefaults.siteName,\n    "headerLogo": headerLogo.asset->{url, "size": metadata.dimensions},\n    "footerLogo": footerLogo.asset->{url, "size": metadata.dimensions},\n    navigation[]{_key, label, page}, phone, email, instagramHandle, cnpj\n  },\n  "button": *[_id == $pageId][0].headerWhatsApp{label, url}\n}': SITE_FRAME_QUERY_RESULT;
   }
 }

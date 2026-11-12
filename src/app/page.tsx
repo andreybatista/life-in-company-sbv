@@ -1,11 +1,11 @@
-import {Schools, Founder, Conversion} from '@/components/home-sections';
+import {Schools, Founder} from '@/components/home-sections';
 import Image from 'next/image';
 import {MethodsSection} from '@/components/methods-section';
 import {ImportanceSection} from '@/components/importance-section';
 import {TextImageSection} from "@/components/text-image-section";
-import type {HOME_PAGE_QUERY_RESULT} from "../../sanity.types";
+import {Conversion} from '@/components/conversion';
 import {Hero} from "@/components/hero";
-import {createImageUrlBuilder} from "@sanity/image-url";
+import {croppedPhoto} from '@/sanity/photo';
 import {defineQuery} from "next-sanity";
 import {SiteFrame} from "@/components/site-frame";
 import {client} from "@/sanity/client";
@@ -23,19 +23,6 @@ const HOME_PAGE_QUERY = defineQuery(`*[_id == "homePage" && _type == "homePage"]
   "contactId": sectionIds.contact, contact{statement,button{label,href}},
   "solutionsId": sectionIds.solutions, solutions{eyebrow, areas[]{_key, title, description, image, button{label, href}}}
 }`);
-
-type HomeImage = NonNullable<HOME_PAGE_QUERY_RESULT>["mainImage"];
-const images = createImageUrlBuilder(client);
-
-function croppedPhoto(photo: HomeImage | undefined, width: number, height: number) {
-  if (!photo?.asset) return undefined;
-  return {
-    src: images.image(photo).width(width).height(height).fit("crop").auto("format").url(),
-    alt: photo.alt ?? "",
-    width,
-    height,
-  };
-}
 
 export default async function Home() {
   const page = await client.fetch(HOME_PAGE_QUERY, {}, {next: {revalidate: 30}});

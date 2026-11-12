@@ -28,7 +28,7 @@
 .finalButton { margin-top: 2rem; min-width: min(16.5rem,100%); border-radius: 3rem; }
 @media (prefers-reduced-motion: no-preference) {
   .finalButton { transition: transform .2s ease; }
-  .finalButton:is(:hover,:focus-visible) { transform: translateY(-2px); }
+  .finalButton:focus-visible { transform: translateY(-2px); }
 }
 @media (max-width: 46rem) {
   .intro, .founder { flex-direction: column; gap: 2rem; }
