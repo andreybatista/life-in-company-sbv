@@ -80,6 +80,19 @@ export type ServicePage = {
     developers?: string;
     residents?: string;
     contracting?: string;
+    courseIntro?: string;
+    courseAudience?: string;
+    syllabus?: string;
+    learningFormats?: string;
+    schoolsProgram?: string;
+    clinicsProgram?: string;
+    gymsProgram?: string;
+    buildingsProgram?: string;
+    practiceGallery?: string;
+    workGallery?: string;
+    instructor?: string;
+    sessions?: string;
+    faq?: string;
     contact?: string;
   };
   hero?: {
@@ -238,6 +251,173 @@ export type ServicePage = {
       title?: string;
       description?: string;
       _type: "item";
+      _key: string;
+    }>;
+  };
+  courseIntro?: {
+    eyebrow?: string;
+    title?: string;
+    body?: string;
+    image?: DifferentialImage;
+  };
+  courseAudience?: {
+    eyebrow?: string;
+    title?: string;
+    items?: Array<{
+      title?: string;
+      description?: string;
+      _type: "item";
+      _key: string;
+    }>;
+  };
+  syllabus?: {
+    eyebrow?: string;
+    title?: string;
+    items?: Array<{
+      title?: string;
+      description?: string;
+      _type: "item";
+      _key: string;
+    }>;
+  };
+  learningFormats?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    items?: Array<{
+      eyebrow?: string;
+      title?: string;
+      description?: string;
+      button?: Button;
+      _type: "item";
+      _key: string;
+    }>;
+  };
+  schoolsProgram?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    button?: Button;
+  };
+  clinicsProgram?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    button?: Button;
+  };
+  gymsProgram?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    button?: Button;
+  };
+  buildingsProgram?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    button?: Button;
+  };
+  practiceGallery?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    images?: Array<{
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "photo";
+      _key: string;
+    }>;
+  };
+  workGallery?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    media?: Array<
+      | {
+          asset?: SanityImageAssetReference;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          alt?: string;
+          _type: "photo";
+          _key: string;
+        }
+      | {
+          title?: string;
+          thumbnail?: {
+            asset?: SanityImageAssetReference;
+            media?: unknown;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            alt?: string;
+            _type: "image";
+          };
+          url?: string;
+          _type: "instagramPost";
+          _key: string;
+        }
+      | {
+          title?: string;
+          poster?: {
+            asset?: SanityImageAssetReference;
+            media?: unknown;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            alt?: string;
+            _type: "image";
+          };
+          url?: string;
+          _type: "video";
+          _key: string;
+        }
+    >;
+    videoLabel?: string;
+    playInstructions?: string;
+  };
+  instructor?: {
+    eyebrow?: string;
+    name?: string;
+    credentials?: string;
+    biography?: string;
+    portrait?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    };
+  };
+  sessions?: {
+    status?: "pending" | "confirmed" | "hidden";
+    eyebrow?: string;
+    nextLabel?: string;
+    pendingLabel?: string;
+    date?: string;
+    location?: string;
+    time?: string;
+    investmentLabel?: string;
+    prices?: Array<{
+      label?: string;
+      value?: string;
+      _type: "price";
+      _key: string;
+    }>;
+    button?: {
+      label?: string;
+      href?: string;
+    };
+  };
+  faq?: {
+    eyebrow?: string;
+    title?: string;
+    questions?: Array<{
+      question?: string;
+      answer?: string;
+      _type: "entry";
       _key: string;
     }>;
   };
@@ -778,6 +958,19 @@ export type ServiceQueryResult = {
     developers?: string;
     residents?: string;
     contracting?: string;
+    courseIntro?: string;
+    courseAudience?: string;
+    syllabus?: string;
+    learningFormats?: string;
+    schoolsProgram?: string;
+    clinicsProgram?: string;
+    gymsProgram?: string;
+    buildingsProgram?: string;
+    practiceGallery?: string;
+    workGallery?: string;
+    instructor?: string;
+    sessions?: string;
+    faq?: string;
     contact?: string;
   };
   hero?: {
@@ -936,6 +1129,173 @@ export type ServiceQueryResult = {
       title?: string;
       description?: string;
       _type: "item";
+      _key: string;
+    }>;
+  };
+  courseIntro?: {
+    eyebrow?: string;
+    title?: string;
+    body?: string;
+    image?: DifferentialImage;
+  };
+  courseAudience?: {
+    eyebrow?: string;
+    title?: string;
+    items?: Array<{
+      title?: string;
+      description?: string;
+      _type: "item";
+      _key: string;
+    }>;
+  };
+  syllabus?: {
+    eyebrow?: string;
+    title?: string;
+    items?: Array<{
+      title?: string;
+      description?: string;
+      _type: "item";
+      _key: string;
+    }>;
+  };
+  learningFormats?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    items?: Array<{
+      eyebrow?: string;
+      title?: string;
+      description?: string;
+      button?: Button;
+      _type: "item";
+      _key: string;
+    }>;
+  };
+  schoolsProgram?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    button?: Button;
+  };
+  clinicsProgram?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    button?: Button;
+  };
+  gymsProgram?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    button?: Button;
+  };
+  buildingsProgram?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    button?: Button;
+  };
+  practiceGallery?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    images?: Array<{
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "photo";
+      _key: string;
+    }>;
+  };
+  workGallery?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    media?: Array<
+      | {
+          title?: string;
+          thumbnail?: {
+            asset?: SanityImageAssetReference;
+            media?: unknown;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            alt?: string;
+            _type: "image";
+          };
+          url?: string;
+          _type: "instagramPost";
+          _key: string;
+        }
+      | {
+          asset?: SanityImageAssetReference;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          alt?: string;
+          _type: "photo";
+          _key: string;
+        }
+      | {
+          title?: string;
+          poster?: {
+            asset?: SanityImageAssetReference;
+            media?: unknown;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            alt?: string;
+            _type: "image";
+          };
+          url?: string;
+          _type: "video";
+          _key: string;
+        }
+    >;
+    videoLabel?: string;
+    playInstructions?: string;
+  };
+  instructor?: {
+    eyebrow?: string;
+    name?: string;
+    credentials?: string;
+    biography?: string;
+    portrait?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    };
+  };
+  sessions?: {
+    status?: "confirmed" | "hidden" | "pending";
+    eyebrow?: string;
+    nextLabel?: string;
+    pendingLabel?: string;
+    date?: string;
+    location?: string;
+    time?: string;
+    investmentLabel?: string;
+    prices?: Array<{
+      label?: string;
+      value?: string;
+      _type: "price";
+      _key: string;
+    }>;
+    button?: {
+      label?: string;
+      href?: string;
+    };
+  };
+  faq?: {
+    eyebrow?: string;
+    title?: string;
+    questions?: Array<{
+      question?: string;
+      answer?: string;
+      _type: "entry";
       _key: string;
     }>;
   };

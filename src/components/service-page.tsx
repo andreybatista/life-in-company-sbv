@@ -17,7 +17,7 @@ type Icon = NonNullable<Content['hero']>['mainImage']
 type Card = {title?: string; description?: string; icon?: Icon; _key: string}
 const images = createImageUrlBuilder(client)
 
-function Band({id, data, tone = 'sand', children}: {
+export function Band({id, data, tone = 'sand', children}: {
   id?: string; data: Copy; tone?: 'sand' | 'dark' | 'white'; children?: ReactNode
 }) {
   return <section id={id} className={styles[tone]} aria-label={data.title || data.eyebrow}>
@@ -34,7 +34,7 @@ function IconImage({icon}: {icon: Icon}) {
   return icon?.asset && <Image src={images.image(icon).url()} alt={icon.alt || ''} width={48} height={48} unoptimized />
 }
 
-function Cards({items, layout = 'two', numbered, className = ''}: {
+export function Cards({items, layout = 'two', numbered, className = ''}: {
   items?: Card[]; layout?: 'two' | 'three' | 'five' | 'columns'; numbered?: boolean; className?: string
 }) {
   if (!items?.length) return null

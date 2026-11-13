@@ -8,6 +8,7 @@ const serviceQuery = defineQuery(`*[_id == $id && _type == 'servicePage'][0]`)
 export const serviceNames = {
   clinicasHospitais: 'Clínicas e Hospitais',
   academias: 'Academias',
+  cursos: 'Cursos',
   edificioCardioprotegido: 'Edifício Cardioprotegido',
 }
 export type ServiceId = keyof typeof serviceNames

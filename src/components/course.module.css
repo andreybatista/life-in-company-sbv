@@ -1,0 +1,37 @@
+.formats, .prices { display: grid; gap: 1.25rem; grid-template-columns: repeat(3,minmax(0,1fr)); }
+.formats li, .instructions, .faq summary { background: var(--color-foreground); color: white; border-radius: .8rem; }
+.formats li { display: flex; flex-direction: column; gap: 1.3rem; padding: 1.6rem; border: 1px solid var(--color-accent); }
+.formats h3, .prices strong { color: var(--color-accent); font-size: clamp(1.35rem,2vw,2rem); font-weight: 700; }
+.formats small, .date > p { color: var(--color-accent); text-transform: uppercase; font-weight: 700; }
+.formats a { align-self: flex-start; margin-top: auto; }
+.gallery, .session, .faq { margin-top: clamp(2rem,4vw,4rem); }
+.track { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 4rem)/3); gap: 2rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; }
+.slide { position: relative; aspect-ratio: 1.72; overflow: hidden; border-radius: 1rem; scroll-snap-align: start; background: var(--color-foreground); }
+.slide img, .slide video, .slide button, .slide iframe { width: 100%; height: 100%; }
+.slide img { object-fit: cover; }
+.slide button, .controls button, .faq summary { cursor: pointer; }
+.slide span { position: absolute; inset: auto 0 0; padding: .8rem; color: white; background: var(--color-deep-green); text-align: left; }
+.controls { display: flex; gap: .6rem; margin-top: .7rem; justify-content: flex-end; }
+.controls button { padding: .5rem 1rem; border: 1px solid var(--color-accent); border-radius: .6rem; }
+.controls button:disabled { opacity: .4; cursor: default; }
+.instructions, .date, .prices li { padding: 1.5rem; border: 1px solid var(--color-accent); border-radius: .8rem; }
+.instructions { margin-top: 1rem; }
+.session { text-align: center; }
+.date h2, .date div { margin-top: .8rem; }
+.session h3 { margin-top: 2rem; font-weight: 700; }
+.prices { margin-top: 1rem; text-align: left; grid-template-columns: repeat(2,minmax(0,1fr)); }
+.prices strong { display: block; }
+.faq details { border: 1px solid var(--color-accent); border-radius: .8rem; }
+.faq details + details { margin-top: .8rem; }
+.faq summary { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.4rem; color: var(--color-accent); font-weight: 700; list-style: none; }
+.faq summary::after { content: '+'; }
+.faq details[open] summary::after { content: '−'; }
+.faq p { padding: 1rem 1.4rem; white-space: pre-line; }
+@media (max-width: 56rem) {
+  .formats { grid-template-columns: 1fr; }
+  .track { gap: 1rem; grid-auto-columns: calc((100% - 1rem)/2); }
+}
+@media (max-width: 40rem) {
+  .track { grid-auto-columns: 92%; }
+  .prices { grid-template-columns: 1fr; }
+}
