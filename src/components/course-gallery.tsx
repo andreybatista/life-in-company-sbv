@@ -74,8 +74,8 @@ export function CourseGallery({slides, label}: {slides: Slide[]; label: string})
       })}
     </div>
     {(!edges.start || !edges.end) && <div className={styles.controls}>
-      <button aria-label="Item anterior" disabled={edges.start} onClick={() => move(-1)}>←</button>
-      <button aria-label="Próximo item" disabled={edges.end} onClick={() => move(1)}>→</button>
+      <button aria-label="Item anterior" disabled={edges.start} onClick={() => move(-1)}><span className="arrow-icon arrow-back" aria-hidden="true" /></button>
+      <button aria-label="Próximo item" disabled={edges.end} onClick={() => move(1)}><span className="arrow-icon" aria-hidden="true" /></button>
     </div>}
   </div>
 }

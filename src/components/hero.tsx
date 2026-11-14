@@ -19,7 +19,8 @@ function HeroLink({label, href, primary}: {
 }) {
   if (!label || !href || !/^(https?:\/\/|\/(?![\/\\])|#[a-z][a-z0-9-]*$)/i.test(href)) return null;
   return <a className={primary ? styles.primary : styles.secondary} href={href}>
-    {label} <span aria-hidden="true">→</span>
+    {label}
+    <span className="arrow-icon" aria-hidden="true" />
   </a>;
 }
 

@@ -16,6 +16,9 @@
 }
 
 body { @apply bg-background text-foreground font-sans; }
+.arrow-icon { display: inline-block; width: 11px; height: 11px; flex: none; translate: 0 1px; background-color: currentColor; mask: url('/arrow.svg') center / contain no-repeat; }
+a > .arrow-icon { margin-inline-start: 5px; }
+.arrow-back { transform: rotate(180deg); }
 body > main { flex: 1; }
 .site-container { max-width: 90rem; margin-inline: auto; padding-inline: clamp(1.25rem, 5vw, 5rem); }
 .header-row, .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
