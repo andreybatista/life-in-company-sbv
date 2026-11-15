@@ -8,7 +8,7 @@ const SITE_FRAME_QUERY = defineQuery(`{
     "footerLogo": footerLogo.asset->{url, "size": metadata.dimensions},
     navigation[]{_key, label, page}, phone, email, instagramHandle, cnpj
   },
-  "button": *[_id == $pageId][0].headerWhatsApp{label, url}
+  "header": *[_id == $pageId][0]{hideHeaderMenu, "button": headerWhatsApp{label, url}}
 }`);
 
 export const routes = {

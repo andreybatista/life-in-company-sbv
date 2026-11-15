@@ -14,7 +14,8 @@ export async function SiteFrame({pageId, children}: {
   pageId: keyof typeof routes;
   children: React.ReactNode;
 }) {
-  const {settings, button} = await getSiteFrame(pageId);
+  const {settings, header} = await getSiteFrame(pageId);
+  const button = header?.button;
   const name = settings?.name || "Life in Company SBV";
   const navigation = settings?.navigation?.flatMap(({_key, page, label}) =>
     page && label && Object.hasOwn(routes, page)
@@ -28,13 +29,7 @@ export async function SiteFrame({pageId, children}: {
     <header className="site-header">
       <div className="site-container header-row">
         <Brand logo={settings?.headerLogo ?? null} name={name} />
-        {!!navigation?.length && <>
-          <nav className="desktop-nav" aria-label="Menu principal">{navigation}</nav>
-          <details className="mobile-nav">
-            <summary data-button>Menu</summary>
-            <nav aria-label="Menu principal">{navigation}</nav>
-          </details>
-        </>}
+        {!header?.hideHeaderMenu && !!navigation?.length && (<nav className="desktop-nav" aria-label="Menu principal">{navigation}</nav>)}
         {button?.label && button.url?.startsWith("https://") && <a data-button className="header-action" href={button.url}>
           {button.label}<span className="whatsapp-icon" aria-hidden="true" />
         </a>}

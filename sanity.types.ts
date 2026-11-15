@@ -62,6 +62,7 @@ export type ServicePage = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  hideHeaderMenu?: boolean;
   headerWhatsApp?: HeaderWhatsApp;
   sectionIds?: {
     hero?: string;
@@ -515,6 +516,7 @@ export type HomePage = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  hideHeaderMenu?: boolean;
   headerWhatsApp?: HeaderWhatsApp;
   sectionIds?: {
     hero?: string;
@@ -951,6 +953,7 @@ export type ServiceQueryResult = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  hideHeaderMenu?: boolean;
   headerWhatsApp?: HeaderWhatsApp;
   sectionIds?: {
     hero?: string;
@@ -1330,7 +1333,7 @@ export type ServiceQueryResult = {
 
 // Source: ../web/src/sanity/site-frame.ts
 // Variable: SITE_FRAME_QUERY
-// Query: {  "settings": *[_id == "siteSettings"][0]{    "name": seoDefaults.siteName,    "headerLogo": headerLogo.asset->{url, "size": metadata.dimensions},    "footerLogo": footerLogo.asset->{url, "size": metadata.dimensions},    navigation[]{_key, label, page}, phone, email, instagramHandle, cnpj  },  "button": *[_id == $pageId][0].headerWhatsApp{label, url}}
+// Query: {  "settings": *[_id == "siteSettings"][0]{    "name": seoDefaults.siteName,    "headerLogo": headerLogo.asset->{url, "size": metadata.dimensions},    "footerLogo": footerLogo.asset->{url, "size": metadata.dimensions},    navigation[]{_key, label, page}, phone, email, instagramHandle, cnpj  },  "header": *[_id == $pageId][0]{hideHeaderMenu, "button": headerWhatsApp{label, url}}}
 export type SITE_FRAME_QUERY_RESULT = {
   settings:
     | {
@@ -1370,10 +1373,19 @@ export type SITE_FRAME_QUERY_RESULT = {
         cnpj: string | null;
       }
     | null;
-  button: {
-    label: string | null;
-    url: string | null;
-  } | null;
+  header:
+    | {
+        hideHeaderMenu: null;
+        button: null;
+      }
+    | {
+        hideHeaderMenu: boolean | null;
+        button: {
+          label: string | null;
+          url: string | null;
+        } | null;
+      }
+    | null;
 };
 
 // Query TypeMap
@@ -1381,7 +1393,7 @@ declare global {
   interface SanityQueries {
     '*[_id == "homePage" && _type == "homePage"][0]{\n  "id": sectionIds.hero, eyebrow, title, description, mainImage,\n  primaryLabel, link, secondaryLabel, secondaryLink,\n  "historyId": sectionIds.history, history{eyebrow, title, body, image, simulation, lecture},\n  "importanceId": sectionIds.importance, importance{eyebrow, statement, description},\n  "purposeId": sectionIds.purpose, purpose{eyebrow, statement},\n  "processId": sectionIds.process, process{eyebrow, methods[]{_key, title, description, "icon": icon.asset->url, "alt": icon.alt}},\n  "schoolsId": sectionIds.schools, schools{eyebrow,title,image,legalNotice,legalIcon{"url":asset->url,alt},description,topics,context,formatsTitle,formats[]{_key,title,description,button{label,href}}},\n  "teamId": sectionIds.team, team{eyebrow,name,credentials,biography,portrait},\n  "contactId": sectionIds.contact, contact{statement,button{label,href}},\n  "solutionsId": sectionIds.solutions, solutions{eyebrow, areas[]{_key, title, description, image, button{label, href}}}\n}': HOME_PAGE_QUERY_RESULT;
     "*[_id == $id && _type == 'servicePage'][0]": ServiceQueryResult;
-    '{\n  "settings": *[_id == "siteSettings"][0]{\n    "name": seoDefaults.siteName,\n    "headerLogo": headerLogo.asset->{url, "size": metadata.dimensions},\n    "footerLogo": footerLogo.asset->{url, "size": metadata.dimensions},\n    navigation[]{_key, label, page}, phone, email, instagramHandle, cnpj\n  },\n  "button": *[_id == $pageId][0].headerWhatsApp{label, url}\n}': SITE_FRAME_QUERY_RESULT;
+    '{\n  "settings": *[_id == "siteSettings"][0]{\n    "name": seoDefaults.siteName,\n    "headerLogo": headerLogo.asset->{url, "size": metadata.dimensions},\n    "footerLogo": footerLogo.asset->{url, "size": metadata.dimensions},\n    navigation[]{_key, label, page}, phone, email, instagramHandle, cnpj\n  },\n  "header": *[_id == $pageId][0]{hideHeaderMenu, "button": headerWhatsApp{label, url}}\n}': SITE_FRAME_QUERY_RESULT;
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too
