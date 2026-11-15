@@ -1,14 +1,16 @@
-import type { Metadata } from "next";
+import {getSeoSettings} from '@/sanity/seo';
 import { Inter } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({variable: '--font-inter', subsets: ['latin'], display: 'swap'});
 
-export const metadata: Metadata = {
-  title: "Life in Company SBV",
-
-};
-
+export async function generateMetadata() {
+  const settings = await getSeoSettings();
+  return {
+    title: settings?.siteName || 'Life in Company SBV',
+    icons: {icon: settings?.favicon || '/favicon.ico'},
+  };
+}
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html

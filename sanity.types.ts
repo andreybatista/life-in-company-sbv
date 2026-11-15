@@ -797,8 +797,9 @@ export type AllSanitySchemaTypes =
 
 // Source: ../web/src/app/page.tsx
 // Variable: HOME_PAGE_QUERY
-// Query: *[_id == "homePage" && _type == "homePage"][0]{  "id": sectionIds.hero, eyebrow, title, description, mainImage,  primaryLabel, link, secondaryLabel, secondaryLink,  "historyId": sectionIds.history, history{eyebrow, title, body, image, simulation, lecture},  "importanceId": sectionIds.importance, importance{eyebrow, statement, description},  "purposeId": sectionIds.purpose, purpose{eyebrow, statement},  "processId": sectionIds.process, process{eyebrow, methods[]{_key, title, description, "icon": icon.asset->url, "alt": icon.alt}},  "schoolsId": sectionIds.schools, schools{eyebrow,title,image,legalNotice,legalIcon{"url":asset->url,alt},description,topics,context,formatsTitle,formats[]{_key,title,description,button{label,href}}},  "teamId": sectionIds.team, team{eyebrow,name,credentials,biography,portrait},  "contactId": sectionIds.contact, contact{statement,button{label,href}},  "solutionsId": sectionIds.solutions, solutions{eyebrow, areas[]{_key, title, description, image, button{label, href}}}}
+// Query: *[_id == "homePage" && _type == "homePage"][0]{  seo, "id": sectionIds.hero, eyebrow, title, description, mainImage,  primaryLabel, link, secondaryLabel, secondaryLink,  "historyId": sectionIds.history, history{eyebrow, title, body, image, simulation, lecture},  "importanceId": sectionIds.importance, importance{eyebrow, statement, description},  "purposeId": sectionIds.purpose, purpose{eyebrow, statement},  "processId": sectionIds.process, process{eyebrow, methods[]{_key, title, description, "icon": icon.asset->url, "alt": icon.alt}},  "schoolsId": sectionIds.schools, schools{eyebrow,title,image,legalNotice,legalIcon{"url":asset->url,alt},description,topics,context,formatsTitle,formats[]{_key,title,description,button{label,href}}},  "teamId": sectionIds.team, team{eyebrow,name,credentials,biography,portrait},  "contactId": sectionIds.contact, contact{statement,button{label,href}},  "solutionsId": sectionIds.solutions, solutions{eyebrow, areas[]{_key, title, description, image, button{label, href}}}}
 export type HOME_PAGE_QUERY_RESULT = {
+  seo: Seo | null;
   id: string | null;
   eyebrow: string | null;
   title: string | null;
@@ -943,6 +944,38 @@ export type HOME_PAGE_QUERY_RESULT = {
     }> | null;
   } | null;
 } | null;
+
+// Source: ../web/src/app/sitemap.xml/route.ts
+// Variable: sitemapQuery
+// Query: *[_id in $ids && _type in ["servicePage", "homePage"] && seo.noIndex != true]{_id, _updatedAt}
+export type SitemapQueryResult = Array<{
+  _id: string;
+  _updatedAt: string;
+}>;
+
+// Source: ../web/src/sanity/seo.ts
+// Variable: settingsQuery
+// Query: *[_id == "siteSettings"][0]{  "siteName": seoDefaults.siteName, "description": seoDefaults.description,  "shareImage": seoDefaults.shareImage, "favicon": favicon.asset->url}
+export type SettingsQueryResult =
+  | {
+      siteName: null;
+      description: null;
+      shareImage: null;
+      favicon: null;
+    }
+  | {
+      siteName: string | null;
+      description: string | null;
+      shareImage: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      } | null;
+      favicon: string | null;
+    }
+  | null;
 
 // Source: ../web/src/sanity/services.ts
 // Variable: serviceQuery
@@ -1391,7 +1424,9 @@ export type SITE_FRAME_QUERY_RESULT = {
 // Query TypeMap
 declare global {
   interface SanityQueries {
-    '*[_id == "homePage" && _type == "homePage"][0]{\n  "id": sectionIds.hero, eyebrow, title, description, mainImage,\n  primaryLabel, link, secondaryLabel, secondaryLink,\n  "historyId": sectionIds.history, history{eyebrow, title, body, image, simulation, lecture},\n  "importanceId": sectionIds.importance, importance{eyebrow, statement, description},\n  "purposeId": sectionIds.purpose, purpose{eyebrow, statement},\n  "processId": sectionIds.process, process{eyebrow, methods[]{_key, title, description, "icon": icon.asset->url, "alt": icon.alt}},\n  "schoolsId": sectionIds.schools, schools{eyebrow,title,image,legalNotice,legalIcon{"url":asset->url,alt},description,topics,context,formatsTitle,formats[]{_key,title,description,button{label,href}}},\n  "teamId": sectionIds.team, team{eyebrow,name,credentials,biography,portrait},\n  "contactId": sectionIds.contact, contact{statement,button{label,href}},\n  "solutionsId": sectionIds.solutions, solutions{eyebrow, areas[]{_key, title, description, image, button{label, href}}}\n}': HOME_PAGE_QUERY_RESULT;
+    '*[_id == "homePage" && _type == "homePage"][0]{\n  seo, "id": sectionIds.hero, eyebrow, title, description, mainImage,\n  primaryLabel, link, secondaryLabel, secondaryLink,\n  "historyId": sectionIds.history, history{eyebrow, title, body, image, simulation, lecture},\n  "importanceId": sectionIds.importance, importance{eyebrow, statement, description},\n  "purposeId": sectionIds.purpose, purpose{eyebrow, statement},\n  "processId": sectionIds.process, process{eyebrow, methods[]{_key, title, description, "icon": icon.asset->url, "alt": icon.alt}},\n  "schoolsId": sectionIds.schools, schools{eyebrow,title,image,legalNotice,legalIcon{"url":asset->url,alt},description,topics,context,formatsTitle,formats[]{_key,title,description,button{label,href}}},\n  "teamId": sectionIds.team, team{eyebrow,name,credentials,biography,portrait},\n  "contactId": sectionIds.contact, contact{statement,button{label,href}},\n  "solutionsId": sectionIds.solutions, solutions{eyebrow, areas[]{_key, title, description, image, button{label, href}}}\n}': HOME_PAGE_QUERY_RESULT;
+    '*[_id in $ids && _type in ["servicePage", "homePage"] && seo.noIndex != true]{_id, _updatedAt}': SitemapQueryResult;
+    '*[_id == "siteSettings"][0]{\n  "siteName": seoDefaults.siteName, "description": seoDefaults.description,\n  "shareImage": seoDefaults.shareImage, "favicon": favicon.asset->url\n}': SettingsQueryResult;
     "*[_id == $id && _type == 'servicePage'][0]": ServiceQueryResult;
     '{\n  "settings": *[_id == "siteSettings"][0]{\n    "name": seoDefaults.siteName,\n    "headerLogo": headerLogo.asset->{url, "size": metadata.dimensions},\n    "footerLogo": footerLogo.asset->{url, "size": metadata.dimensions},\n    navigation[]{_key, label, page}, phone, email, instagramHandle, cnpj\n  },\n  "header": *[_id == $pageId][0]{hideHeaderMenu, "button": headerWhatsApp{label, url}}\n}': SITE_FRAME_QUERY_RESULT;
   }

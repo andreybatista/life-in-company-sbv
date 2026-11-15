@@ -1,3 +1,4 @@
+import {pageMetadata} from '@/sanity/seo';
 import {Schools, Founder} from '@/components/home-sections';
 import Image from 'next/image';
 import {MethodsSection} from '@/components/methods-section';
@@ -11,8 +12,13 @@ import {SiteFrame} from "@/components/site-frame";
 import {client} from "@/sanity/client";
 
 
+export async function generateMetadata() {
+  const home = await client.fetch(HOME_PAGE_QUERY, {}, {next: {revalidate: 30}});
+  return pageMetadata('homePage', undefined, home?.seo, home?.description);
+}
+
 const HOME_PAGE_QUERY = defineQuery(`*[_id == "homePage" && _type == "homePage"][0]{
-  "id": sectionIds.hero, eyebrow, title, description, mainImage,
+  seo, "id": sectionIds.hero, eyebrow, title, description, mainImage,
   primaryLabel, link, secondaryLabel, secondaryLink,
   "historyId": sectionIds.history, history{eyebrow, title, body, image, simulation, lecture},
   "importanceId": sectionIds.importance, importance{eyebrow, statement, description},
