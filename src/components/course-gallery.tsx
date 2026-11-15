@@ -16,7 +16,7 @@ export type Slide = {
 
 export function CourseGallery({slides, label}: {slides: Slide[]; label: string}) {
   const [autoScroll] = useState(() => AutoScroll({
-    speed: 4, startDelay: 0, playOnInit: false, stopOnInteraction: true,
+    speed: 2, startDelay: 0, playOnInit: false, stopOnInteraction: true,
     stopOnFocusIn: false, breakpoints: {'(prefers-reduced-motion: reduce)': {active: false}},
   }))
   const [viewport, api] = useEmblaCarousel({loop: true, align: 'start'}, [autoScroll])

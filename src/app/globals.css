@@ -15,6 +15,10 @@
   --text-section-body: 1.1875rem;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
 body { @apply bg-background text-foreground font-sans; }
 .arrow-icon { display: inline-block; width: 11px; height: 11px; flex: none; translate: 0 1px; background-color: currentColor; mask: url('/arrow.svg') center / contain no-repeat; }
 a > .arrow-icon { margin-inline-start: 5px; }

@@ -13,6 +13,13 @@ import styles from '@/components/course.module.css'
 
 export const generateMetadata = () => serviceMetadata('cursos')
 
+function formatSessionDate(date: string) {
+  const [year, , day] = date.split('-')
+  const month = new Intl.DateTimeFormat('pt-BR', {month: 'short', timeZone: 'UTC'})
+    .format(new Date(date)).replace(/\.$/, '').toUpperCase()
+  return [day, month, year].join(' · ')
+}
+
 function slidesFor(items: NonNullable<ServicePage['workGallery']>['media'] = []): Slide[] {
   return items.flatMap((item): Slide[] => {
     if (item._type === 'photo') {
@@ -32,7 +39,7 @@ function Sessions({id, data}: {id?: string; data: NonNullable<ServicePage['sessi
       <div className={styles.date}>
         {data.nextLabel && <p>{data.nextLabel}</p>}
         <h2>{data.status === 'pending' ? data.pendingLabel || 'Data a confirmar' : data.date &&
-          <time dateTime={data.date}>{new Intl.DateTimeFormat('pt-BR', {dateStyle: 'long', timeZone: 'UTC'}).format(new Date(data.date))}</time>}</h2>
+          <time dateTime={data.date}>{formatSessionDate(data.date)}</time>}</h2>
         <div>{[data.location, data.time].filter(Boolean).join(' · ')}</div>
       </div>
       {!!data.prices?.length && <>
