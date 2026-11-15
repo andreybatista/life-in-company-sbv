@@ -11,10 +11,10 @@ function Brand({logo, name}: {logo: Settings["headerLogo"]; name: string}) {
 }
 
 export async function SiteFrame({pageId, children}: {
-  pageId: keyof typeof routes;
+  pageId?: keyof typeof routes;
   children: React.ReactNode;
 }) {
-  const {settings, header} = await getSiteFrame(pageId);
+  const {settings, header} = await getSiteFrame(pageId ?? "homePage");
   const button = header?.button;
   const name = settings?.name || "Life in Company SBV";
   const navigation = settings?.navigation?.flatMap(({_key, page, label}) =>
