@@ -1,7 +1,9 @@
 'use client'
 
 import Image from 'next/image'
-import {useEffect, useRef, useState} from 'react'
+import {useEffect, useState} from 'react'
+import useEmblaCarousel from 'embla-carousel-react'
+import AutoScroll from 'embla-carousel-auto-scroll'
 import styles from './course.module.css'
 
 export type Slide = {
@@ -33,32 +35,36 @@ function embedUrl(raw: string) {
 }
 
 export function CourseGallery({slides, label}: {slides: Slide[]; label: string}) {
-  const track = useRef<HTMLDivElement>(null)
+  const [autoScroll] = useState(() => AutoScroll({
+    speed: 4, startDelay: 0, playOnInit: false, stopOnInteraction: true,
+    stopOnFocusIn: false, breakpoints: {'(prefers-reduced-motion: reduce)': {active: false}},
+  }))
+  const [viewport, api] = useEmblaCarousel({loop: true, align: 'start'}, [autoScroll])
   const [playing, setPlaying] = useState<string>()
-  const [edges, setEdges] = useState({start: true, end: true})
+  const [hovered, setHovered] = useState(false)
+  const [focused, setFocused] = useState(false)
   useEffect(() => {
-    const el = track.current
-    if (!el) return
-    const update = () => setEdges({start: el.scrollLeft <= 2, end: el.scrollLeft + el.clientWidth >= el.scrollWidth - 2})
-    const observer = new ResizeObserver(update)
-    observer.observe(el)
-    update()
-    el.addEventListener('scroll', update)
-    return () => { observer.disconnect(); el.removeEventListener('scroll', update) }
-  }, [slides.length])
-  function move(direction: number) {
-    const el = track.current
-    const first = el?.firstElementChild
-    if (!first || !el) return
-    const step = first.getBoundingClientRect().width + parseFloat(getComputedStyle(el).columnGap)
-    el.scrollBy({left: direction * step, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'})
-    setPlaying(undefined)
-  }
+    if (!api) return
+    function sync() {
+      if (playing || hovered || focused || slides.length < 2 || matchMedia('(prefers-reduced-motion: reduce)').matches) autoScroll.stop()
+      else autoScroll.play()
+    }
+    sync()
+    api.on('reInit', sync).on('pointerUp', sync)
+    const stopVideo = () => setPlaying(undefined)
+    api.on('select', stopVideo)
+    return () => { api.off('reInit', sync).off('pointerUp', sync).off('select', stopVideo) }
+  }, [api, autoScroll, playing, hovered, focused, slides.length])
+
   if (!slides.length) return null
-  return <div className={styles.gallery} role="region" aria-label={label} aria-roledescription="carrossel">
-    <div ref={track} className={styles.track} tabIndex={0}>
+  return <div className={styles.gallery} role="region" aria-label={label} aria-roledescription="carrossel"
+    onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
+    onFocusCapture={event => setFocused(event.target.matches(':focus-visible'))}
+    onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false) }}>
+    <div ref={viewport} className={styles.viewport}>
+      <div className={styles.track} data-count={slides.length}>
       {slides.map(slide => {
-        const image = slide.image && <Image {...slide.image} unoptimized />
+        const image = slide.image && <Image {...slide.image} alt={slide.image.alt} unoptimized />
         if (slide.kind === 'photo') return <div key={slide.key} className={styles.slide}>{image}</div>
         if (slide.kind === 'instagramPost') return <a className={styles.slide} key={slide.key} href={slide.url} target="_blank" rel="noopener noreferrer">
           {image}<span>{slide.title || 'Ver publicação no Instagram'} ↗</span>
@@ -69,13 +75,10 @@ export function CourseGallery({slides, label}: {slides: Slide[]; label: string})
           {playing !== slide.key ? <button type="button" onClick={() => setPlaying(slide.key)}>
             {image}<span>▶ {slide.title || 'Reproduzir vídeo'}</span>
           </button> : embed ? <iframe title={slide.title || 'Vídeo do treinamento'} src={embed} allow="autoplay; fullscreen; picture-in-picture" allowFullScreen /> :
-            <video src={src} aria-label={slide.title} controls autoPlay playsInline />}
+            <video src={src} aria-label={slide.title} controls autoPlay playsInline onEnded={() => setPlaying(undefined)} />}
         </div>
       })}
     </div>
-    {(!edges.start || !edges.end) && <div className={styles.controls}>
-      <button aria-label="Item anterior" disabled={edges.start} onClick={() => move(-1)}><span className="arrow-icon arrow-back" aria-hidden="true" /></button>
-      <button aria-label="Próximo item" disabled={edges.end} onClick={() => move(1)}><span className="arrow-icon" aria-hidden="true" /></button>
-    </div>}
+    </div>
   </div>
 }

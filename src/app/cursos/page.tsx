@@ -78,7 +78,8 @@ export default async function CoursePage() {
     {sessions && <Sessions id={ids.sessions} data={sessions} />}
     {faq && <Band data={faq} id={ids.faq} tone="white"><div className={styles.faq}>
       {faq.questions?.map((entry, i) => <details name="course-faq" key={entry._key} open={i === 0}>
-        <summary>{entry.question}</summary><p>{entry.answer}</p>
+        <summary>{entry.question}</summary>
+        <div className={styles.answer}><p>{entry.answer}</p></div>
       </details>)}
     </div></Band>}
   </main></SiteFrame>
