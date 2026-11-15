@@ -1,6 +1,6 @@
 .section { background: var(--color-deep-green); }
-.inner { max-width: 90rem; margin-inline: auto; padding: clamp(3rem, 5vw, 5rem) 4%; }
-.heading { margin: 0 0 2.5rem 1.25rem; color: var(--color-accent); font-size: var(--text-eyebrow); font-weight: 700; text-transform: uppercase; }
+.inner { max-width: var(--site-width); margin-inline: auto; padding: clamp(3rem, 5vw, 5rem) var(--site-gutter); }
+.heading { margin: 0 0 2.5rem; color: var(--color-accent); font-size: var(--text-eyebrow); font-weight: 700; text-transform: uppercase; }
 .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
 .card { display: flex; align-items: flex-start; gap: 1rem; padding: clamp(1rem, 1.8vw, 1.75rem) 1rem; border-radius: 1rem; border: 1px solid var(--color-accent); background: var(--color-foreground); overflow-wrap: anywhere; }
 .icon { display: grid; place-items: center; flex: none; width: clamp(3.5rem, 6.5vw, 6rem); aspect-ratio: 1; border: 1px solid var(--color-accent); border-radius: 50%; background: var(--color-deep-green); }
@@ -10,8 +10,8 @@
 .card h3 + p { margin-top: .85rem; }
 @media (width < 1200px) {
   .cards { grid-template-columns: 1fr; }
-  .inner { padding-inline: 6%; }
-  .heading { margin-left: 0; }
+
+
 }
 @media (max-width: 46rem) {
   .card { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; }

@@ -31,11 +31,11 @@ export async function SiteFrame({pageId, children}: {
         {!!navigation?.length && <>
           <nav className="desktop-nav" aria-label="Menu principal">{navigation}</nav>
           <details className="mobile-nav">
-            <summary>Menu</summary>
+            <summary data-button>Menu</summary>
             <nav aria-label="Menu principal">{navigation}</nav>
           </details>
         </>}
-        {button?.label && button.url?.startsWith("https://") && <a className="header-action" href={button.url}>
+        {button?.label && button.url?.startsWith("https://") && <a data-button className="header-action" href={button.url}>
           {button.label}<span className="whatsapp-icon" aria-hidden="true" />
         </a>}
       </div>

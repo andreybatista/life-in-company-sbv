@@ -20,11 +20,24 @@
 }
 
 body { @apply bg-background text-foreground font-sans; }
+@media (hover: hover) {
+  [data-button]:hover {
+    box-shadow: inset 0 0 0 100vmax color-mix(in srgb, var(--color-accent) 12%, transparent);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [data-button] { transition: box-shadow 180ms ease-out; }
+  }
+}
 .arrow-icon { display: inline-block; width: 11px; height: 11px; flex: none; translate: 0 1px; background-color: currentColor; mask: url('/arrow.svg') center / contain no-repeat; }
 a > .arrow-icon { margin-inline-start: 5px; }
 .arrow-back { transform: rotate(180deg); }
 body > main { flex: 1; }
-.site-container { max-width: 90rem; margin-inline: auto; padding-inline: clamp(1.25rem, 5vw, 5rem); }
+:root {
+  --site-width: 90rem;
+  --site-gutter: clamp(1.25rem, 5vw, 5rem);
+  --section-inset: calc(var(--site-gutter) + max(0px, (100% - var(--site-width)) / 2));
+}
+.site-container { max-width: var(--site-width); margin-inline: auto; padding-inline: var(--site-gutter); }
 .header-row, .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
 .header-row { min-height: 5.25rem; padding-block: .75rem; position: relative; }
 .brand { font-size: 1.625rem; font-weight: 700; line-height: 1.1; }

@@ -59,7 +59,7 @@ export default async function Home() {
           <section
             id={page.purposeId ?? undefined}
             aria-label={page.purpose.eyebrow || page.purpose.statement || undefined}
-            className="bg-background px-[6%] py-[clamp(3rem,5vw,4.5rem)] text-center text-foreground"
+            className="bg-background px-[var(--section-inset)] py-[clamp(3rem,5vw,4.5rem)] text-center text-foreground"
           >
             {page.purpose.eyebrow && (
               <p className="text-eyebrow font-bold uppercase text-accent">{page.purpose.eyebrow}</p>
@@ -74,7 +74,7 @@ export default async function Home() {
         {page?.process && <MethodsSection id={page.processId} content={page.process} />}
         {!!page?.solutions?.areas?.length && (
           <section id={page.solutionsId ?? undefined} aria-label={page.solutions.eyebrow || "Áreas de atuação"} className="bg-sand text-foreground">
-            <div className="mx-auto max-w-[90rem] px-[5%] py-[clamp(3rem,5vw,5rem)]">
+            <div className="site-container py-[clamp(3rem,5vw,5rem)]">
               {page.solutions.eyebrow && <h2 className="mb-9 text-eyebrow font-bold uppercase text-accent">{page.solutions.eyebrow}</h2>}
               <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
                 {page.solutions.areas.map(area => {
@@ -87,7 +87,7 @@ export default async function Home() {
                         {area.title && <h3 className="text-2xl leading-tight font-bold">{area.title}</h3>}
                         {area.description && <p className="whitespace-pre-line">{area.description}</p>}
                         {area.button?.label && href && /^(?:https?:\/\/|\/(?![\/\\])|#)/i.test(href) && (
-                          <a href={href} className="mt-auto inline-flex min-h-12 items-center rounded-lg border border-accent bg-foreground px-5 py-3 text-sm font-bold text-accent hover:underline focus-visible:outline-foreground">
+                          <a data-button href={href} className="mt-auto inline-flex min-h-12 items-center rounded-lg border border-accent bg-foreground px-5 py-3 text-sm font-bold text-accent focus-visible:outline-foreground">
                             {area.button.label}<span className="arrow-icon" aria-hidden="true" />
                           </a>
                         )}

@@ -1,7 +1,7 @@
 .sand { background: var(--color-sand); }
 .white { background: var(--color-background); }
 .dark { background: var(--color-deep-green); color: var(--color-background); }
-.inner, .legal { max-width: 90rem; margin-inline: auto; padding: clamp(3rem, 5.6vw, 5.5rem) 6%; overflow-wrap: anywhere; }
+.inner, .legal { max-width: var(--site-width); margin-inline: auto; padding: clamp(3rem, 5.6vw, 5.5rem) var(--site-gutter); overflow-wrap: anywhere; }
 .eyebrow { font-size: var(--text-eyebrow); font-weight: 700; color: var(--color-accent); text-transform: uppercase; }
 .inner h2, .legal h2 { font-size: clamp(2rem, 3.1vw, var(--text-section)); font-weight: 700; line-height: 1.16; white-space: pre-line; text-wrap: balance; }
 .eyebrow + h2 { margin-top: 1.6rem; }
