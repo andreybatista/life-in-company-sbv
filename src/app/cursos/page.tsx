@@ -21,7 +21,7 @@ function slidesFor(items: NonNullable<ServicePage['workGallery']>['media'] = [])
     }
     if (!item.url || !URL.canParse(item.url) || new URL(item.url).protocol !== 'https:') return []
     return [{key: item._key, kind: item._type, title: item.title, url: item.url,
-      image: croppedPhoto(item._type === 'video' ? item.poster : item.thumbnail, 840, 490)}]
+      image: item._type === 'video' ? croppedPhoto(item.poster, 582, 668) : croppedPhoto(item.thumbnail, 840, 490)}]
   })
 }
 
@@ -49,7 +49,7 @@ export default async function CoursePage() {
   if (!page) notFound()
   const ids = page.sectionIds ?? {}
   const {hero, courseIntro, courseAudience, syllabus, learningFormats, practiceGallery, workGallery, instructor, sessions, faq} = page
-  const work = slidesFor(workGallery?.media)
+  const work = slidesFor([...(workGallery?.videos ?? []), ...(workGallery?.media ?? [])])
   return <SiteFrame pageId="cursos"><main>
     <Hero {...hero} id={ids.hero} title={hero?.title || 'Cursos'} primary={hero?.button} image={croppedPhoto(hero?.mainImage, 960, 1006)} />
     {courseIntro && <TextImageSection {...courseIntro} id={ids.courseIntro} mainImage={croppedPhoto(courseIntro.image, 760, 650)} />}
@@ -67,10 +67,6 @@ export default async function CoursePage() {
     </Band>}
     {workGallery && <Band id={ids.workGallery} data={workGallery} tone="dark">
       <CourseGallery slides={work} label={workGallery.title || 'Nosso trabalho na prática'} />
-      {work.some(item => item.kind === 'video') && <div className={styles.instructions}>
-        {workGallery.videoLabel && <strong>{workGallery.videoLabel}</strong>}
-        {workGallery.playInstructions && <p>{workGallery.playInstructions}</p>}
-      </div>}
     </Band>}
     {instructor && <Founder id={ids.instructor ?? null} photo={croppedPhoto(instructor.portrait, 580, 720)}
       data={{eyebrow: instructor.eyebrow ?? null, name: instructor.name ?? null, credentials: instructor.credentials ?? null,

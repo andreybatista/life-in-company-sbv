@@ -335,6 +335,19 @@ export type ServicePage = {
     eyebrow?: string;
     title?: string;
     description?: string;
+    videos?: Array<{
+      poster?: {
+        asset: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+      };
+      url?: string;
+      _type: "video";
+      _key: string;
+    }>;
     media?: Array<
       | {
           asset?: SanityImageAssetReference;
@@ -374,8 +387,6 @@ export type ServicePage = {
           _key: string;
         }
     >;
-    videoLabel?: string;
-    playInstructions?: string;
   };
   instructor?: {
     eyebrow?: string;
@@ -1213,6 +1224,19 @@ export type ServiceQueryResult = {
     eyebrow?: string;
     title?: string;
     description?: string;
+    videos?: Array<{
+      poster?: {
+        asset: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+      };
+      url?: string;
+      _type: "video";
+      _key: string;
+    }>;
     media?: Array<
       | {
           title?: string;
@@ -1252,8 +1276,6 @@ export type ServiceQueryResult = {
           _key: string;
         }
     >;
-    videoLabel?: string;
-    playInstructions?: string;
   };
   instructor?: {
     eyebrow?: string;
