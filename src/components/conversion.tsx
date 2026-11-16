@@ -4,7 +4,7 @@ type Button = {label?: string | null; href?: string | null};
 
 export function Action({button, final = false}: {button: Button | null | undefined; final?: boolean}) {
   if (!button?.label || !button.href || !/^(?:https?:\/\/|\/(?![\/\\])|#)/i.test(button.href)) return null;
-  return <a data-button className={final ? styles.finalButton : styles.button} href={button.href}>
+  return <a target="_blank" rel="noopener noreferrer" data-button className={final ? styles.finalButton : styles.button} href={button.href}>
     {button.label}{!final && <span className="arrow-icon" aria-hidden="true" />}
   </a>;
 }

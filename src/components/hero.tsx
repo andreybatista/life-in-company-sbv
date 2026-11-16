@@ -18,7 +18,7 @@ function HeroLink({label, href, primary}: {
   primary?: boolean;
 }) {
   if (!label || !href || !/^(https?:\/\/|\/(?![\/\\])|#[a-z][a-z0-9-]*$)/i.test(href)) return null;
-  return <a data-button className={primary ? styles.primary : styles.secondary} href={href}>
+  return <a target="_blank" rel="noopener noreferrer" data-button className={primary ? styles.primary : styles.secondary} href={href}>
     {label}
     <span className="arrow-icon" aria-hidden="true" />
   </a>;
