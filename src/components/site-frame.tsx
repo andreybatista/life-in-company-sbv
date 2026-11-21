@@ -1,3 +1,4 @@
+import {SiteLink} from '@/components/site-link';
 import Image from "next/image";
 import Link from "next/link";
 import {getSiteFrame, routes} from "@/sanity/site-frame";
@@ -5,7 +6,7 @@ import {getSiteFrame, routes} from "@/sanity/site-frame";
 type Settings = NonNullable<Awaited<ReturnType<typeof getSiteFrame>>["settings"]>;
 
 function Brand({logo, name}: {logo: Settings["headerLogo"]; name: string}) {
-  return <Link target="_blank" rel="noopener noreferrer" href="/" className="brand">
+  return <Link href="/" className="brand">
     {logo?.url && logo.size ? <Image src={logo.url} alt={name} width={logo.size.width} height={logo.size.height} unoptimized /> : name}
   </Link>;
 }
@@ -19,7 +20,7 @@ export async function SiteFrame({pageId, children}: {
   const name = settings?.name || "Life in Company SBV";
   const navigation = settings?.navigation?.flatMap(({_key, page, label}) =>
     page && label && Object.hasOwn(routes, page)
-      ? [<Link target="_blank" rel="noopener noreferrer" key={_key} href={routes[page]} aria-current={page === pageId ? "page" : undefined}>{label}</Link>]
+      ? [<Link key={_key} href={routes[page]} aria-current={page === pageId ? "page" : undefined}>{label}</Link>]
       : []
   );
   const phone = settings?.phone?.replace(/\D/g, "");
@@ -30,9 +31,9 @@ export async function SiteFrame({pageId, children}: {
       <div className="site-container header-row">
         <Brand logo={settings?.headerLogo ?? null} name={name} />
         {!header?.hideHeaderMenu && !!navigation?.length && (<nav className="desktop-nav" aria-label="Menu principal">{navigation}</nav>)}
-        {button?.label && button.url?.startsWith("https://") && <a target="_blank" rel="noopener noreferrer" data-button className="header-action" href={button.url}>
+        {button?.label && button.url?.startsWith("https://") && <SiteLink data-button className="header-action" href={button.url}>
           {button.label}<span className="whatsapp-icon" aria-hidden="true" />
-        </a>}
+        </SiteLink>}
       </div>
     </header>
     {children}
@@ -40,9 +41,9 @@ export async function SiteFrame({pageId, children}: {
       <div className="site-container footer-row">
         <Brand logo={settings?.footerLogo ?? null} name={name} />
         <address className="contacts">
-          {number && <a target="_blank" rel="noopener noreferrer" href={`https://wa.me/${number}`}>WhatsApp  {settings?.phone}</a>}
-          {instagram && <a target="_blank" rel="noopener noreferrer" href={`https://www.instagram.com/${encodeURIComponent(instagram)}/`}>Instagram  @{instagram}</a>}
-          {settings?.email && <a target="_blank" rel="noopener noreferrer" href={`mailto:${settings.email}`}>{settings.email}</a>}
+          {number && <SiteLink href={`https://wa.me/${number}`}>WhatsApp  {settings?.phone}</SiteLink>}
+          {instagram && <SiteLink href={`https://www.instagram.com/${encodeURIComponent(instagram)}/`}>Instagram  @{instagram}</SiteLink>}
+          {settings?.email && <SiteLink href={`mailto:${settings.email}`}>{settings.email}</SiteLink>}
           {settings?.cnpj && <span>CNPJ: {settings.cnpj}</span>}
         </address>
       </div>

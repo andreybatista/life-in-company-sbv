@@ -1,3 +1,4 @@
+import {SiteLink} from '@/components/site-link';
 import type {ReactNode} from 'react'
 import Image from 'next/image'
 import {notFound} from 'next/navigation'
@@ -82,7 +83,7 @@ export async function ServicePage({id}: {id: ServiceId}) {
         <div><p className={styles.eyebrow}>{responsibility.eyebrow}</p><h2>{responsibility.title}</h2><p className={styles.body}>{responsibility.description}</p></div>
         {law && <aside><h3><IconImage icon={law.icon} />{law.title}</h3>
           <ul>{law.laws?.map(entry => <li key={entry._key}>{entry.url && /^https?:\/\//i.test(entry.url)
-            ? <a target="_blank" rel="noopener noreferrer" href={entry.url}>{entry.title}</a> : entry.title}{entry.title && entry.description && ': '}{entry.description}</li>)}</ul>
+            ? <SiteLink href={entry.url}>{entry.title}</SiteLink> : entry.title}{entry.title && entry.description && ': '}{entry.description}</li>)}</ul>
         </aside>}
       </div>
     </section>}

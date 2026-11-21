@@ -1,3 +1,4 @@
+import {SiteLink} from '@/components/site-link';
 import {pageMetadata} from '@/sanity/seo';
 import {Schools, Founder} from '@/components/home-sections';
 import Image from 'next/image';
@@ -93,9 +94,9 @@ export default async function Home() {
                         {area.title && <h3 className="text-2xl leading-tight font-bold">{area.title}</h3>}
                         {area.description && <p className="whitespace-pre-line">{area.description}</p>}
                         {area.button?.label && href && /^(?:https?:\/\/|\/(?![\/\\])|#)/i.test(href) && (
-                          <a target="_blank" rel="noopener noreferrer" data-button href={href} className="mt-auto inline-flex min-h-12 items-center rounded-lg border border-accent bg-foreground px-5 py-3 text-sm font-bold text-accent focus-visible:outline-foreground">
+                          <SiteLink data-button href={href} className="mt-auto inline-flex min-h-12 items-center rounded-lg border border-accent bg-foreground px-5 py-3 text-sm font-bold text-accent focus-visible:outline-foreground">
                             {area.button.label}<span className="arrow-icon" aria-hidden="true" />
-                          </a>
+                          </SiteLink>
                         )}
                       </div>
                     </li>

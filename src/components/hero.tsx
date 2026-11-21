@@ -1,3 +1,4 @@
+import {SiteLink} from '@/components/site-link';
 import Image from "next/image";
 import styles from "./hero.module.css";
 
@@ -18,10 +19,10 @@ function HeroLink({label, href, primary}: {
   primary?: boolean;
 }) {
   if (!label || !href || !/^(https?:\/\/|\/(?![\/\\])|#[a-z][a-z0-9-]*$)/i.test(href)) return null;
-  return <a target="_blank" rel="noopener noreferrer" data-button className={primary ? styles.primary : styles.secondary} href={href}>
+  return <SiteLink data-button className={primary ? styles.primary : styles.secondary} href={href}>
     {label}
     <span className="arrow-icon" aria-hidden="true" />
-  </a>;
+  </SiteLink>;
 }
 
 export function Hero({id, eyebrow, title, description, image, primary, secondary}: HeroProps) {

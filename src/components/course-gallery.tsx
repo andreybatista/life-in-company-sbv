@@ -1,4 +1,5 @@
 'use client'
+import {SiteLink} from '@/components/site-link'
 
 import Image from 'next/image'
 import {useEffect, useState} from 'react'
@@ -49,13 +50,13 @@ export function CourseGallery({slides, label}: {slides: Slide[]; label: string})
         const key = `${copy}-${slide.key}`
         const image = slide.image && <Image {...slide.image} alt={slide.image.alt} unoptimized />
         if (slide.kind === 'photo') return <div key={key} aria-hidden={copy > 0 || undefined} className={styles.slide}>{image}</div>
-        if (slide.kind === 'instagramPost') return <a className={styles.slide} key={key} tabIndex={copy ? -1 : undefined} href={slide.url} target="_blank" rel="noopener noreferrer">
+        if (slide.kind === 'instagramPost') return <SiteLink className={styles.slide} key={key} tabIndex={copy ? -1 : undefined} href={slide.url}>
           {image}<span>{slide.title || 'Ver publicação no Instagram'} ↗</span>
-        </a>
-        return <a className={styles.videoPreview} key={key} tabIndex={copy ? -1 : undefined} href={slide.url} target="_blank" rel="noopener noreferrer"
-          aria-label={`${slide.title || slide.image?.alt || 'Abrir vídeo'} (abre em nova aba)`}>
+        </SiteLink>
+        return <SiteLink className={styles.videoPreview} key={key} tabIndex={copy ? -1 : undefined} href={slide.url}
+          aria-label={`${slide.title || slide.image?.alt || 'Abrir vídeo'}`}>
           {image}
-        </a>
+        </SiteLink>
       })}
     </div>
     </div>
