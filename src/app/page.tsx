@@ -20,7 +20,7 @@ export async function generateMetadata() {
 
 const HOME_PAGE_QUERY = defineQuery(`*[_id == "homePage" && _type == "homePage"][0]{
   seo, "id": sectionIds.hero, eyebrow, title, description, mainImage,
-  primaryLabel, link, secondaryLabel, secondaryLink,
+  primaryLabel, link, secondaryLabel, secondaryLink, heroButtons, heroButtonsMigrated,
   "historyId": sectionIds.history, history{eyebrow, title, body, image, simulation, lecture},
   "importanceId": sectionIds.importance, importance{eyebrow, statement, description},
   "purposeId": sectionIds.purpose, purpose{eyebrow, statement},
@@ -43,6 +43,8 @@ export default async function Home() {
           title={page?.title ?? "Life in Company SBV"}
           description={page?.description}
           image={croppedPhoto(page?.mainImage, 960, 1006)}
+          buttons={page?.heroButtons}
+          buttonsMigrated={page?.heroButtonsMigrated}
           primary={{label: page?.primaryLabel ?? "Saiba mais", href: page?.link}}
           secondary={{label: page?.secondaryLabel, href: page?.secondaryLink}}
         />

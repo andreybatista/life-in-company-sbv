@@ -11,6 +11,8 @@ type HeroProps = {
   image?: {src: string; alt: string};
   primary?: Action;
   secondary?: Action;
+  buttons?: (Action & {_key: string; variant?: string | null})[] | null;
+  buttonsMigrated?: boolean | null;
 };
 
 function HeroLink({label, href, primary}: {
@@ -25,7 +27,11 @@ function HeroLink({label, href, primary}: {
   </SiteLink>;
 }
 
-export function Hero({id, eyebrow, title, description, image, primary, secondary}: HeroProps) {
+export function Hero({id, eyebrow, title, description, image, primary, secondary, buttons, buttonsMigrated}: HeroProps) {
+  const actions = buttons ?? (buttonsMigrated ? [] : [
+    {...primary, _key: 'legacy-primary', variant: 'primary'},
+    {...secondary, _key: 'legacy-secondary', variant: 'secondary'},
+  ]);
   return (
   <section id={id ?? undefined} className={styles.hero} aria-labelledby="hero-heading">
     {image && <div className={styles.photo}>
@@ -40,8 +46,7 @@ export function Hero({id, eyebrow, title, description, image, primary, secondary
         <h1 id="hero-heading">{title}</h1>
         {description && <p className={styles.description}>{description}</p>}
         <div className={styles.actions}>
-          <HeroLink primary href={primary?.href} label={primary?.label} />
-          <HeroLink href={secondary?.href} label={secondary?.label} />
+          {actions.slice(0, 2).map(action => <HeroLink key={action._key} primary={action.variant !== 'secondary'} href={action.href} label={action.label} />)}
         </div>
       </div>
     </div>

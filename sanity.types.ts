@@ -108,7 +108,18 @@ export type ServicePage = {
       alt?: string;
       _type: "image";
     };
-    button?: Button;
+    buttons?: Array<{
+      label?: string;
+      href?: string;
+      variant?: "primary" | "secondary";
+      _type: "heroButton";
+      _key: string;
+    }>;
+    buttonsMigrated?: boolean;
+    button?: {
+      label?: string;
+      href?: string;
+    };
   };
   reality?: {
     eyebrow?: string;
@@ -540,6 +551,14 @@ export type HomePage = {
     alt?: string;
     _type: "image";
   };
+  heroButtons?: Array<{
+    label?: string;
+    href?: string;
+    variant?: "primary" | "secondary";
+    _type: "heroButton";
+    _key: string;
+  }>;
+  heroButtonsMigrated?: boolean;
   primaryLabel?: string;
   link?: string;
   secondaryLabel?: string;
@@ -797,7 +816,7 @@ export type AllSanitySchemaTypes =
 
 // Source: ../web/src/app/page.tsx
 // Variable: HOME_PAGE_QUERY
-// Query: *[_id == "homePage" && _type == "homePage"][0]{  seo, "id": sectionIds.hero, eyebrow, title, description, mainImage,  primaryLabel, link, secondaryLabel, secondaryLink,  "historyId": sectionIds.history, history{eyebrow, title, body, image, simulation, lecture},  "importanceId": sectionIds.importance, importance{eyebrow, statement, description},  "purposeId": sectionIds.purpose, purpose{eyebrow, statement},  "processId": sectionIds.process, process{eyebrow, methods[]{_key, title, description, "icon": icon.asset->url, "alt": icon.alt}},  "schoolsId": sectionIds.schools, schools{eyebrow,title,image,legalNotice,legalIcon{"url":asset->url,alt},description,topics,context,formatsTitle,formats[]{_key,title,description,button{label,href}}},  "teamId": sectionIds.team, team{eyebrow,name,credentials,biography,portrait},  "contactId": sectionIds.contact, contact{statement,button{label,href}},  "solutionsId": sectionIds.solutions, solutions{eyebrow, areas[]{_key, title, description, image, button{label, href}}}}
+// Query: *[_id == "homePage" && _type == "homePage"][0]{  seo, "id": sectionIds.hero, eyebrow, title, description, mainImage,  primaryLabel, link, secondaryLabel, secondaryLink, heroButtons, heroButtonsMigrated,  "historyId": sectionIds.history, history{eyebrow, title, body, image, simulation, lecture},  "importanceId": sectionIds.importance, importance{eyebrow, statement, description},  "purposeId": sectionIds.purpose, purpose{eyebrow, statement},  "processId": sectionIds.process, process{eyebrow, methods[]{_key, title, description, "icon": icon.asset->url, "alt": icon.alt}},  "schoolsId": sectionIds.schools, schools{eyebrow,title,image,legalNotice,legalIcon{"url":asset->url,alt},description,topics,context,formatsTitle,formats[]{_key,title,description,button{label,href}}},  "teamId": sectionIds.team, team{eyebrow,name,credentials,biography,portrait},  "contactId": sectionIds.contact, contact{statement,button{label,href}},  "solutionsId": sectionIds.solutions, solutions{eyebrow, areas[]{_key, title, description, image, button{label, href}}}}
 export type HOME_PAGE_QUERY_RESULT = {
   seo: Seo | null;
   id: string | null;
@@ -816,6 +835,14 @@ export type HOME_PAGE_QUERY_RESULT = {
   link: string | null;
   secondaryLabel: string | null;
   secondaryLink: string | null;
+  heroButtons: Array<{
+    label?: string;
+    href?: string;
+    variant?: "primary" | "secondary";
+    _type: "heroButton";
+    _key: string;
+  }> | null;
+  heroButtonsMigrated: boolean | null;
   historyId: string | null;
   history: {
     eyebrow: string | null;
@@ -1032,7 +1059,18 @@ export type ServiceQueryResult = {
       alt?: string;
       _type: "image";
     };
-    button?: Button;
+    buttons?: Array<{
+      label?: string;
+      href?: string;
+      variant?: "primary" | "secondary";
+      _type: "heroButton";
+      _key: string;
+    }>;
+    buttonsMigrated?: boolean;
+    button?: {
+      label?: string;
+      href?: string;
+    };
   };
   reality?: {
     eyebrow?: string;
@@ -1424,7 +1462,7 @@ export type SITE_FRAME_QUERY_RESULT = {
 // Query TypeMap
 declare global {
   interface SanityQueries {
-    '*[_id == "homePage" && _type == "homePage"][0]{\n  seo, "id": sectionIds.hero, eyebrow, title, description, mainImage,\n  primaryLabel, link, secondaryLabel, secondaryLink,\n  "historyId": sectionIds.history, history{eyebrow, title, body, image, simulation, lecture},\n  "importanceId": sectionIds.importance, importance{eyebrow, statement, description},\n  "purposeId": sectionIds.purpose, purpose{eyebrow, statement},\n  "processId": sectionIds.process, process{eyebrow, methods[]{_key, title, description, "icon": icon.asset->url, "alt": icon.alt}},\n  "schoolsId": sectionIds.schools, schools{eyebrow,title,image,legalNotice,legalIcon{"url":asset->url,alt},description,topics,context,formatsTitle,formats[]{_key,title,description,button{label,href}}},\n  "teamId": sectionIds.team, team{eyebrow,name,credentials,biography,portrait},\n  "contactId": sectionIds.contact, contact{statement,button{label,href}},\n  "solutionsId": sectionIds.solutions, solutions{eyebrow, areas[]{_key, title, description, image, button{label, href}}}\n}': HOME_PAGE_QUERY_RESULT;
+    '*[_id == "homePage" && _type == "homePage"][0]{\n  seo, "id": sectionIds.hero, eyebrow, title, description, mainImage,\n  primaryLabel, link, secondaryLabel, secondaryLink, heroButtons, heroButtonsMigrated,\n  "historyId": sectionIds.history, history{eyebrow, title, body, image, simulation, lecture},\n  "importanceId": sectionIds.importance, importance{eyebrow, statement, description},\n  "purposeId": sectionIds.purpose, purpose{eyebrow, statement},\n  "processId": sectionIds.process, process{eyebrow, methods[]{_key, title, description, "icon": icon.asset->url, "alt": icon.alt}},\n  "schoolsId": sectionIds.schools, schools{eyebrow,title,image,legalNotice,legalIcon{"url":asset->url,alt},description,topics,context,formatsTitle,formats[]{_key,title,description,button{label,href}}},\n  "teamId": sectionIds.team, team{eyebrow,name,credentials,biography,portrait},\n  "contactId": sectionIds.contact, contact{statement,button{label,href}},\n  "solutionsId": sectionIds.solutions, solutions{eyebrow, areas[]{_key, title, description, image, button{label, href}}}\n}': HOME_PAGE_QUERY_RESULT;
     '*[_id in $ids && _type in ["servicePage", "homePage"] && seo.noIndex != true]{_id, _updatedAt}': SitemapQueryResult;
     '*[_id == "siteSettings"][0]{\n  "siteName": seoDefaults.siteName, "description": seoDefaults.description,\n  "shareImage": seoDefaults.shareImage, "favicon": favicon.asset->url\n}': SettingsQueryResult;
     "*[_id == $id && _type == 'servicePage'][0]": ServiceQueryResult;
