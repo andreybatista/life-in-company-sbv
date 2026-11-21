@@ -54,8 +54,32 @@ body > main { flex: 1; }
 .site-footer .brand { font-size: 1.6875rem; }
 .contacts { display: grid; grid-template-columns: repeat(2, auto); gap: 1.2rem 2rem; font-size: 1.0625rem; font-style: normal; overflow-wrap: anywhere; }
 :focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.mobile-menu-trigger, .floating-whatsapp { display: none; }
+.mobile-menu-trigger, .mobile-menu-heading button { align-items: center; justify-content: center; width: 44px; height: 44px; flex: none; cursor: pointer; border-radius: 8px; }
+.mobile-menu-dialog { position: fixed; inset: 0 0 0 auto; margin: 0; width: min(22rem, 88vw); max-width: none; height: 100dvh; max-height: none; padding: 1.5rem; padding-top: max(1.5rem, env(safe-area-inset-top)); border: 0; background: var(--color-background); color: var(--color-foreground); }
+.mobile-menu-dialog::backdrop { background: rgb(0 32 31 / 55%); }
+.mobile-menu-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 2rem; font-size: 1.25rem; font-weight: 700; }
+.mobile-menu-heading button { display: inline-flex; }
+.mobile-menu-dialog nav { display: flex; flex-direction: column; gap: .5rem; }
+.mobile-menu-dialog nav a { margin-left: -.75rem; padding: 1rem .75rem; border-radius: 8px; font-size: 1rem; }
+.mobile-menu-dialog nav a:hover, .mobile-menu-dialog nav a[aria-current="page"] { background: var(--color-sand); }
+@keyframes whatsapp-enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes menu-enter { from { transform: translateX(100%); } to { transform: translateX(0); } }
+@keyframes menu-exit { from { transform: translateX(0); } to { transform: translateX(100%); } }
+@keyframes menu-backdrop-enter { from { opacity: 0; } to { opacity: 1; } }
+@keyframes menu-backdrop-exit { from { opacity: 1; } to { opacity: 0; } }
+@media (prefers-reduced-motion: no-preference) {
+  .floating-whatsapp { animation: whatsapp-enter 400ms ease-out 150ms both; }
+  .mobile-menu-dialog[open] { animation: menu-enter 450ms cubic-bezier(.22, 1, .36, 1) both; }
+  .mobile-menu-dialog[open]::backdrop { animation: menu-backdrop-enter 450ms ease both; }
+  .mobile-menu-dialog[open][data-closing] { animation: menu-exit 450ms cubic-bezier(.4, 0, .2, 1) both; }
+  .mobile-menu-dialog[open][data-closing]::backdrop { animation: menu-backdrop-exit 450ms ease both; }
+}
 @media (max-width: 66rem) {
-  .desktop-nav { display: none; }
+  .desktop-nav, .header-action { display: none; }
+  .mobile-menu-trigger { display: inline-flex; margin-left: auto; }
+  .floating-whatsapp { display: inline-flex; align-items: center; justify-content: center; position: fixed; right: max(1.25rem, env(safe-area-inset-right)); bottom: max(1.25rem, env(safe-area-inset-bottom)); z-index: 30; width: 56px; height: 56px; border-radius: 50%; background: var(--color-deep-green); border: 1px solid var(--color-accent); color: var(--color-accent); box-shadow: 0 4px 18px rgb(0 32 31 / 18%); }
+  .floating-whatsapp .whatsapp-icon { width: 28px; height: 28px; }
 }
 @media (max-width: 44rem) {
   :root { --header-height: max(4rem, calc(44px + 1.5rem)); }

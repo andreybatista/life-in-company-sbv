@@ -1,4 +1,5 @@
 import {SiteLink} from '@/components/site-link';
+import {MobileMenu} from './mobile-menu';
 import Image from "next/image";
 import Link from "next/link";
 import {getSiteFrame, routes} from "@/sanity/site-frame";
@@ -31,11 +32,15 @@ export async function SiteFrame({pageId, children}: {
       <div className="site-container header-row">
         <Brand logo={settings?.headerLogo ?? null} name={name} />
         {!header?.hideHeaderMenu && !!navigation?.length && (<nav className="desktop-nav" aria-label="Menu principal">{navigation}</nav>)}
+        {!header?.hideHeaderMenu && !!navigation?.length && <MobileMenu>{navigation}</MobileMenu>}
         {button?.label && button.url?.startsWith("https://") && <SiteLink data-button className="header-action" href={button.url}>
           {button.label}<span className="whatsapp-icon" aria-hidden="true" />
         </SiteLink>}
       </div>
     </header>
+    {button?.url?.startsWith("https://") && <SiteLink data-button className="floating-whatsapp" href={button.url} aria-label={button.label || 'Fale no WhatsApp'}>
+      <span className="whatsapp-icon" aria-hidden="true" />
+    </SiteLink>}
     {children}
     <footer className="site-footer">
       <div className="site-container footer-row">
