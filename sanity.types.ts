@@ -32,7 +32,7 @@ export type SanityImageAssetReference = {
   [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
 };
 
-export type DifferentialImage = {
+export type SchoolSafetyImage = {
   asset?: SanityImageAssetReference;
   media?: unknown;
   hotspot?: SanityImageHotspot;
@@ -67,7 +67,9 @@ export type ServicePage = {
   sectionIds?: {
     hero?: string;
     reality?: string;
+    schoolSafety?: string;
     learning?: string;
+    schoolCulture?: string;
     process?: string;
     methodology?: string;
     differential?: string;
@@ -125,11 +127,24 @@ export type ServicePage = {
     eyebrow?: string;
     title?: string;
     body?: string;
-    image?: DifferentialImage;
+    image?: SchoolSafetyImage;
+  };
+  schoolSafety?: {
+    eyebrow?: string;
+    title?: string;
+    body?: string;
+    image?: SchoolSafetyImage;
   };
   learning?: {
     eyebrow?: string;
+    title?: string;
+    description?: string;
     topics?: Array<string>;
+  };
+  schoolCulture?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
   };
   process?: {
     eyebrow?: string;
@@ -164,7 +179,7 @@ export type ServicePage = {
     eyebrow?: string;
     title?: string;
     body?: string;
-    image?: DifferentialImage;
+    image?: SchoolSafetyImage;
   };
   audience?: {
     eyebrow?: string;
@@ -216,7 +231,7 @@ export type ServicePage = {
     eyebrow?: string;
     title?: string;
     body?: string;
-    image?: DifferentialImage;
+    image?: SchoolSafetyImage;
   };
   equipment?: {
     eyebrow?: string;
@@ -270,7 +285,7 @@ export type ServicePage = {
     eyebrow?: string;
     title?: string;
     body?: string;
-    image?: DifferentialImage;
+    image?: SchoolSafetyImage;
   };
   courseAudience?: {
     eyebrow?: string;
@@ -504,6 +519,7 @@ export type SiteSettings = {
       | "homePage"
       | "clinicasHospitais"
       | "academias"
+      | "escolas"
       | "edificioCardioprotegido"
       | "cursos";
     _key: string;
@@ -796,7 +812,7 @@ export type AllSanitySchemaTypes =
   | Button
   | HeaderWhatsApp
   | SanityImageAssetReference
-  | DifferentialImage
+  | SchoolSafetyImage
   | Seo
   | ShareImage
   | ServicePage
@@ -1018,7 +1034,9 @@ export type ServiceQueryResult = {
   sectionIds?: {
     hero?: string;
     reality?: string;
+    schoolSafety?: string;
     learning?: string;
+    schoolCulture?: string;
     process?: string;
     methodology?: string;
     differential?: string;
@@ -1076,11 +1094,24 @@ export type ServiceQueryResult = {
     eyebrow?: string;
     title?: string;
     body?: string;
-    image?: DifferentialImage;
+    image?: SchoolSafetyImage;
+  };
+  schoolSafety?: {
+    eyebrow?: string;
+    title?: string;
+    body?: string;
+    image?: SchoolSafetyImage;
   };
   learning?: {
     eyebrow?: string;
+    title?: string;
+    description?: string;
     topics?: Array<string>;
+  };
+  schoolCulture?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
   };
   process?: {
     eyebrow?: string;
@@ -1115,7 +1146,7 @@ export type ServiceQueryResult = {
     eyebrow?: string;
     title?: string;
     body?: string;
-    image?: DifferentialImage;
+    image?: SchoolSafetyImage;
   };
   audience?: {
     eyebrow?: string;
@@ -1167,7 +1198,7 @@ export type ServiceQueryResult = {
     eyebrow?: string;
     title?: string;
     body?: string;
-    image?: DifferentialImage;
+    image?: SchoolSafetyImage;
   };
   equipment?: {
     eyebrow?: string;
@@ -1221,7 +1252,7 @@ export type ServiceQueryResult = {
     eyebrow?: string;
     title?: string;
     body?: string;
-    image?: DifferentialImage;
+    image?: SchoolSafetyImage;
   };
   courseAudience?: {
     eyebrow?: string;
@@ -1435,6 +1466,7 @@ export type SITE_FRAME_QUERY_RESULT = {
             | "clinicasHospitais"
             | "cursos"
             | "edificioCardioprotegido"
+            | "escolas"
             | "homePage"
             | null;
         }> | null;

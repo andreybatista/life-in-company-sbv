@@ -14,6 +14,7 @@ const SITE_FRAME_QUERY = defineQuery(`{
 export const routes = {
   homePage: "/",
   academias: "/academias",
+  escolas: "/escolas",
   clinicasHospitais: "/clinicas-e-hospitais",
   edificioCardioprotegido: "/edificio-cardioprotegido",
   cursos: "/cursos",

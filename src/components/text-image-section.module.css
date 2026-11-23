@@ -21,3 +21,4 @@
   .gallery { width: min(100%, 26rem); justify-self: center; }
 }
 .dark { background: var(--color-deep-green); color: var(--color-background); }
+.accentBody { color: var(--color-accent); }

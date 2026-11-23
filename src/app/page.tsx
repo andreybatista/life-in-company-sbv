@@ -1,6 +1,6 @@
 import {SiteLink} from '@/components/site-link';
 import {pageMetadata} from '@/sanity/seo';
-import {Schools, Founder} from '@/components/home-sections';
+import {Founder} from '@/components/home-sections';
 import Image from 'next/image';
 import {MethodsSection} from '@/components/methods-section';
 import {ImportanceSection} from '@/components/importance-section';
@@ -85,12 +85,12 @@ export default async function Home() {
           <section id={page.solutionsId ?? undefined} aria-label={page.solutions.eyebrow || "Áreas de atuação"} className="bg-sand text-foreground">
             <div className="site-container py-[clamp(3rem,5vw,5rem)]">
               {page.solutions.eyebrow && <h2 className="mb-9 text-eyebrow font-bold uppercase text-accent">{page.solutions.eyebrow}</h2>}
-              <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 min-[1367px]:grid-cols-4">
                 {page.solutions.areas.map(area => {
                   const photo = croppedPhoto(area.image, 840, 450);
                   const href = area.button?.href;
                   return (
-                    <li key={area._key} className="flex flex-col overflow-hidden rounded-2xl bg-background">
+                    <li key={area._key} className="flex min-w-0 flex-col overflow-hidden rounded-2xl bg-background wrap-break-word">
                       {photo && <Image {...photo} className="h-auto w-full" unoptimized />}
                       <div className="flex flex-1 flex-col gap-4 p-6">
                         {area.title && <h3 className="text-2xl leading-tight font-bold">{area.title}</h3>}
@@ -108,7 +108,6 @@ export default async function Home() {
             </div>
           </section>
         )}
-        {page?.schools && <Schools id={page.schoolsId} data={page.schools} photo={croppedPhoto(page.schools.image, 786, 596)} />}
         {page?.team && <Founder id={page.teamId} data={page.team} photo={croppedPhoto(page.team.portrait, 580, 856)} />}
         {page?.contact && <Conversion id={page.contactId} data={page.contact} />}
       </main>

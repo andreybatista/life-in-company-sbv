@@ -62,13 +62,20 @@ export async function ServicePage({id}: {id: ServiceId}) {
   if (!page) notFound()
   const anchors = page.sectionIds ?? {}
   const {hero, reality, learning, process, methodology, differential, audience, materials, onlineCourse,
-    responsibility, deliverables, commitment, equipment, developers, residents, contracting, contact} = page
+    responsibility, deliverables, commitment, equipment, developers, residents, contracting, contact, schoolSafety, schoolCulture} = page
   const law = responsibility?.legislation
   const building = id === 'edificioCardioprotegido'
   return <SiteFrame pageId={id}><main>
     <Hero {...hero} id={anchors.hero} title={hero?.title || serviceNames[id]} primary={hero?.button}
       image={croppedPhoto(hero?.mainImage, 960, 1006)} />
-    {reality && <TextImageSection {...reality} id={anchors.reality} mainImage={croppedPhoto(reality.image, 720, building ? 460 : 720)} />}
+    {reality && <TextImageSection {...reality} id={anchors.reality} mainImage={croppedPhoto(reality.image, 720, building ? 460 : id === 'escolas' ? 620 : 720)} />}
+    {id === 'escolas' && <>
+      {schoolSafety && <TextImageSection dark accentBody {...schoolSafety} id={anchors.schoolSafety} mainImage={croppedPhoto(schoolSafety.image, 720, 620)} />}
+      {learning && <Band data={learning} id={anchors.learning} tone="dark">
+        <Cards items={learning.topics?.map((topic, index) => ({_key: `topic-${index}`, title: topic}))} />
+      </Band>}
+      {schoolCulture && <Band data={schoolCulture} id={anchors.schoolCulture} tone="white" />}
+    </>}
     {id === 'clinicasHospitais' && <>
       {learning && <Band data={learning} id={anchors.learning} tone="dark"><Labels items={learning.topics} mode="topics" /></Band>}
       {process && <Band data={process} id={anchors.process}><Cards items={process.steps} layout="columns" /></Band>}

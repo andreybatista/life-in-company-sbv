@@ -9,12 +9,13 @@ type TextImageSectionProps = {
   title?: string | null;
   body?: string | null;
   dark?: boolean;
+  accentBody?: boolean;
   mainImage?: Photo;
   secondaryImages?: readonly (Photo | undefined)[];
 };
 
 export function TextImageSection({
-  id, eyebrow, title, body, mainImage, dark, secondaryImages = [],
+  id, eyebrow, title, body, mainImage, dark, accentBody, secondaryImages = [],
 }: TextImageSectionProps) {
   if (!title && !eyebrow && !body && !mainImage && !secondaryImages.some(Boolean)) return null;
   return (
@@ -23,7 +24,7 @@ export function TextImageSection({
         <div className={styles.copy}>
           {eyebrow && <p className={styles.eyebrow}>{eyebrow}</p>}
           {title && <h2>{title}</h2>}
-          {body && <div className={styles.body}>{body.trim().split(/\r?\n\s*\r?\n/).map((paragraph, index) =>
+          {body && <div className={[styles.body, accentBody && styles.accentBody].filter(Boolean).join(' ')}>{body.trim().split(/\r?\n\s*\r?\n/).map((paragraph, index) =>
             <p key={index}>{paragraph}</p>
           )}</div>}
         </div>

@@ -6,6 +6,10 @@ import {getSiteFrame, routes} from "@/sanity/site-frame";
 
 type Settings = NonNullable<Awaited<ReturnType<typeof getSiteFrame>>["settings"]>;
 
+function hasRoute(page: string): page is keyof typeof routes {
+  return Object.hasOwn(routes, page);
+}
+
 function Brand({logo, name}: {logo: Settings["headerLogo"]; name: string}) {
   return <Link href="/" className="brand">
     {logo?.url && logo.size ? <Image src={logo.url} alt={name} width={logo.size.width} height={logo.size.height} unoptimized /> : name}
@@ -20,7 +24,7 @@ export async function SiteFrame({pageId, children}: {
   const button = header?.button;
   const name = settings?.name || "Life in Company SBV";
   const navigation = settings?.navigation?.flatMap(({_key, page, label}) =>
-    page && label && Object.hasOwn(routes, page)
+    page && label && hasRoute(page)
       ? [<Link key={_key} href={routes[page]} aria-current={page === pageId ? "page" : undefined}>{label}</Link>]
       : []
   );
