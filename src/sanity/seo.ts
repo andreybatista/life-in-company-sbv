@@ -5,6 +5,7 @@ import type {Seo} from '../../sanity.types'
 import {client} from './client'
 import {croppedPhoto} from './photo'
 import {routes} from './site-frame'
+import {siteOrigin} from '@/lib/site-url'
 
 const settingsQuery = defineQuery(`*[_id == "siteSettings"][0]{
   "siteName": seoDefaults.siteName, "description": seoDefaults.description,
@@ -18,7 +19,7 @@ export async function pageMetadata(id: keyof typeof routes, pageName?: string, s
   const title = seo?.title || pageName || siteName
   const description = seo?.description || defaults?.description || intro || undefined
   const image = croppedPhoto(seo?.shareImage?.asset ? seo.shareImage : defaults?.shareImage, 1200, 630)
-  const url = process.env.SITE_URL ? new URL(routes[id], process.env.SITE_URL).href : undefined
+  const url = new URL(routes[id], siteOrigin).href
   return {
     title, description,
     alternates: url ? {canonical: url} : undefined,
